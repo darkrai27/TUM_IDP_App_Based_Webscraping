@@ -70,3 +70,9 @@ def _(arg: str):
   print(response)
   return response.text
 
+@singledispatch
+def queryuser(arg, dtsg, session_id):
+  """
+  Returns a user profile by its user internal id (number) or it's username (string) if matched
+  """
+  return arg
