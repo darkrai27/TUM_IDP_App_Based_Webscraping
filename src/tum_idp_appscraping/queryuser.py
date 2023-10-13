@@ -96,9 +96,9 @@ def _(arg: str, dtsg, session_id):
   return res
 
 
-def query_posts(user_id):
+def get_posts(user_id):
   """
-  Returns all posts of a user by its internal user id
+  Returns the most recent posts of a user by its internal user id
   """
 
   headers = {
@@ -134,7 +134,7 @@ def query_posts(user_id):
   res = json.loads(response.text)
   return res
 
-def queryuser_posts(user_id, dtsg, session_id):
+def get_posts(user_id, dtsg, session_id):
   """
   Returns most recent posts of a user by its internal user id
   """
@@ -152,7 +152,7 @@ def queryuser_posts(user_id, dtsg, session_id):
   res = json.loads(response.text)
   return res
 
-def scrap_all(user_id, dtsg, session_id, limit=None):
+def scrap_all_posts(user_id, dtsg, session_id, limit=None):
   """
   Returns all posts of a user by its internal user id or the most recent up to a limit of posts
   """
@@ -197,3 +197,23 @@ def scrap_all(user_id, dtsg, session_id, limit=None):
 
   print(len(res["data"]["mediaData"]["edges"]))
   return res
+
+def get_follows_info(username, dtsg, session_id):
+  "Returns an overview information of the number of followers and following of an account"
+  profile = queryuser(username, dtsg, session_id)
+
+  user_id = profile["data"]["xdt_user_by_username"]["pk"]
+
+  cookies = {
+    'sessionid': session_id
+  }
+
+  data = {
+      'fb_dtsg': dtsg,
+      'variables': f'{{"userID":"{user_id}"}}',
+      'doc_id': '6732076973551340',
+  }
+
+  response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
+
+  return json.loads(response.text)
