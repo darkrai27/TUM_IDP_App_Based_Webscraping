@@ -1,7 +1,11 @@
 from functools import singledispatch
 import requests
-import json
+from pydantic import Json
 from time import sleep
+
+"""
+This file contains all functions to retrieve specific information about a user
+"""
 
 headers = {
     'authority': 'www.threads.net',
@@ -22,48 +26,49 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
   }
 
+# -----------------------------------
+# DISCARDED CODE, DOESN'T WORK ANYMORE WITHOUT A FB_LSD HEADER
+# @singledispatch
+# def queryuser(arg):
+#   """
+#   Returns a user profile by its user internal id (number) or it's username (string) if matched
+#   """
+#   return arg
+
+# @queryuser.register
+# def _(arg: int):
+#   data = {
+#       'variables': f'{{"userID": "{arg}"}}',
+#       'doc_id': '6298858840243790',
+#   }
+
+#   response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
+#   res = json.loads(response.text)
+#   return res
+  
+
+# @queryuser.register
+# def _(arg: str):
+  
+#   data = {
+#     'variables': f'{{"username":"{arg}"}}',
+#     'doc_id': '6422182904495995',
+#   }
+
+#   response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
+#   res = json.loads(response.text)
+#   return res
+# --------------------------------------------------------------------
+
 @singledispatch
-def queryuser(arg):
+def queryuser(arg, dtsg: str, session_id: str) -> Json:
   """
-  Returns a user profile by its user internal id (number) or it's username (string) if matched
+  Returns a user profile by its user internal id (number) or it's username (string) is matched
   """
   return arg
 
 @queryuser.register
-def _(arg: int):
-  data = {
-      'variables': f'{{"userID": "{arg}"}}',
-      'doc_id': '6298858840243790',
-  }
-
-  print(data)
-
-  response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
-  res = json.loads(response.text)
-  return res
-  
-
-@queryuser.register
-def _(arg: str):
-  
-  data = {
-    'variables': f'{{"username":"{arg}"}}',
-    'doc_id': '6422182904495995',
-  }
-
-  response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
-  res = json.loads(response.text)
-  return res
-
-@singledispatch
-def queryuser(arg, dtsg, session_id):
-  """
-  Returns a user profile by its user internal id (number) or it's username (string) if matched
-  """
-  return arg
-
-@queryuser.register
-def _(arg: int, dtsg, session_id):
+def _(arg: int, dtsg: str, session_id: str) -> Json:
 
   data = {
       'fb_dtsg': dtsg,
@@ -80,7 +85,7 @@ def _(arg: int, dtsg, session_id):
   
 
 @queryuser.register
-def _(arg: str, dtsg, session_id):
+def _(arg: str, dtsg: str, session_id: str) -> Json:
   
   data = {
     'fb_dtsg': dtsg,
@@ -134,10 +139,13 @@ def get_posts(user_id):
   res = json.loads(response.text)
   return res
 
-def get_posts(user_id, dtsg, session_id):
+def get_posts(username, dtsg, session_id):
   """
   Returns most recent posts of a user by its internal user id
   """
+
+  profile = queryuser(username, dtsg, session_id)
+  user_id = profile["data"]["xdt_user_by_username"]["pk"]
 
   data = {
       'fb_dtsg': dtsg,
@@ -152,10 +160,15 @@ def get_posts(user_id, dtsg, session_id):
   res = json.loads(response.text)
   return res
 
-def scrap_all_posts(user_id, dtsg, session_id, limit=None):
+def scrap_all_posts(username: str, dtsg: str, session_id: str, limit:int = None, delay: int = 5):
   """
-  Returns all posts of a user by its internal user id or the most recent up to a limit of posts
+  Returns all posts of the account with the passed username using its internal user_id or the most recent up post to a limit of posts.
+  Each query is performed each delay seconds (5 by default) to avoid banning the account for bot activity.
   """
+
+  profile = queryuser(username, dtsg, session_id)
+
+  user_id = profile["data"]["xdt_user_by_username"]["pk"]
 
   data = {
     'fb_dtsg': dtsg,
@@ -169,10 +182,11 @@ def scrap_all_posts(user_id, dtsg, session_id, limit=None):
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
   print(response.text)
   response = json.loads(response.text)
+  cursor = response["data"]["mediaData"]["page_info"]["end_cursor"]
   res = response
 
-  while True and (limit == None or limit > 0):
-    print(response["data"]["mediaData"]["page_info"]["end_cursor"])
+  while True and (limit == None or limit > 0) and cursor != None:
+    print(cursor)
     print(len(response["data"]["mediaData"]["edges"]))
     data = {
       'fb_dtsg': dtsg,
@@ -182,23 +196,25 @@ def scrap_all_posts(user_id, dtsg, session_id, limit=None):
     response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
     print(response.text)
     response = json.loads(response.text)
+    cursor = response["data"]["mediaData"]["page_info"]["end_cursor"]
     
     if len(response["data"]["mediaData"]["edges"]) > 0:
       res["data"]["mediaData"]["edges"].extend(response["data"]["mediaData"]["edges"])
     else:
       break
-    
+
+      
     # for edge in response["data"]["mediaData"]["edges"]:
     #   res["data"]["mediaData"]["edges"].append(edge)
 
     if limit != None:
-      limit -= 10
+      limit -= len(response["data"]["mediaData"]["edges"])
     sleep(5)
 
   print(len(res["data"]["mediaData"]["edges"]))
   return res
 
-def get_follows_info(username, dtsg, session_id):
+def get_follows_info(username: str, dtsg: str, session_id: str):
   "Returns an overview information of the number of followers and following of an account"
   profile = queryuser(username, dtsg, session_id)
 
