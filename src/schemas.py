@@ -39,8 +39,11 @@ class User(BaseModel):
     transparency_label: Optional[dict] = Field(None, description="Transparency label.")
     text_post_app_remove_mention_entrypoint: Optional[bool] = Field(None, description="Whether to remove the mention entry point.")
 
-class Data(BaseModel):
+class UserData(BaseModel):
     user: User
+
+class Data(BaseModel):
+    userData: UserData
 
 class Extensions(BaseModel):
     is_final: bool = Field(..., description="...")
@@ -49,9 +52,9 @@ class Json1(BaseModel):
     data: Data
     extensions: Extensions
 
-class UserData(BaseModel):
-    user: User
+class Data2(BaseModel):
+    xdt_user_by_username: User
 
 class Json2(BaseModel):
-    data: UserData
+    data: Data2
     extensions: Extensions

@@ -2,6 +2,18 @@ from functools import singledispatch
 import requests
 from pydantic import Json
 from time import sleep
+import json
+from schemas import (
+  HdProfilePicVersion,
+  FriendshipStatus,
+  BiographyWithEntities,
+  User,
+  Data,
+  Extensions,
+  Json1,
+  UserData,
+  Json2,
+)
 
 """
 This file contains all functions to retrieve specific information about a user
@@ -80,8 +92,9 @@ def _(arg: int, dtsg: str, session_id: str) -> Json:
   }
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  res = json.loads(response.text)
-  return res
+  print(response.text)
+  res = Json1.model_validate_json(response.text)
+  return res.data.userData.user
   
 
 @queryuser.register
@@ -97,7 +110,8 @@ def _(arg: str, dtsg: str, session_id: str) -> Json:
   } 
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  res = json.loads(response.text)
+  print(response.text)
+  res = Json2.model_validate_json(response.text)
   return res
 
 
