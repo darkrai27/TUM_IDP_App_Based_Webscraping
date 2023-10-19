@@ -159,11 +159,11 @@ def get_posts(username, dtsg, session_id):
   """
 
   profile = queryuser(username, dtsg, session_id)
-  user_id = profile["data"]["xdt_user_by_username"]["pk"]
+  user_id = profile.data.xdt_user_by_username.pk
 
   data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"userID": "{user_id}"}}',
+      'variables': f'{{"userID": "{user_id}","__relay_internal__pv__BarcelonaIsPollsConsumptionEnabledrelayprovider":false,"__relay_internal__pv__BarcelonaIsViewCountEnabledrelayprovider":false}}',
       'doc_id': '23980155134932173',
   }
   cookies = {
