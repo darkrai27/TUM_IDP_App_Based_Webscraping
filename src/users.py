@@ -163,7 +163,7 @@ def get_posts(username, dtsg, session_id):
 
   data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"userID": "{user_id}","__relay_internal__pv__BarcelonaIsPollsConsumptionEnabledrelayprovider":false,"__relay_internal__pv__BarcelonaIsViewCountEnabledrelayprovider":false}}',
+      'variables': f'{{"userID": "{user_id}"}}',
       'doc_id': '23980155134932173',
   }
   cookies = {
