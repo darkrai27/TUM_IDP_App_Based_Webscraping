@@ -12,10 +12,19 @@ This project is a Python library created to extract data from the app `Threads <
 
    This project is under active development.
 
-.. toctree::
+Index
+-----
 
+.. toctree::
+   :maxdepth: 1
+   
+   about
    usage
-
-.. toctree::
-
    source
+
+Indices and tables
+------------------
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
