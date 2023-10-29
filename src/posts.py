@@ -3,7 +3,11 @@ import requests
 from pydantic import Json
 from time import sleep
 import json
+import os
+from dotenv import load_dotenv
+
 from postSchemas import JsonPosts
+load_dotenv()
 
 # headers = {
 #     'authority': 'www.threads.net',
@@ -48,7 +52,7 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
   }
   
-def get_post(postID: int, dtsg: str, session_id: str):
+def get_post(postID: int, dtsg: str = None, session_id: str = None):
 
   '''
   Gets a thread with all its posts and the most relevant replies.
@@ -61,6 +65,13 @@ def get_post(postID: int, dtsg: str, session_id: str):
   Returns:
     List (Edge): List of objects containing all information about a thread, its different posts and the replies 
   '''
+
+
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
   
   data = {
       'fb_dtsg': dtsg,
@@ -77,7 +88,7 @@ def get_post(postID: int, dtsg: str, session_id: str):
   print(response.text)
   return JsonPosts.model_validate_json(response.text).data.data.edges
 
-def get_post(postID: int, dtsg: str, session_id: str, limit: int = None, delay: int = 5):
+def get_post(postID: int, dtsg: str = None, session_id: str = None, limit: int = None, delay: int = 5):
 
   '''
   Gets a thread with all its posts and crawls recursively all the replies up to the stablished limit.
@@ -93,7 +104,16 @@ def get_post(postID: int, dtsg: str, session_id: str, limit: int = None, delay: 
     List (Edge): List of objects containing all information about a thread, its different posts and all the requested replies
   '''
 
-def get_likers(postID: int, dtsg: str, session_id: str):
+
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
+
+  pass
+
+def get_likers(postID: int, dtsg: str = None, session_id: str = None):
 
   '''
   Collects the most recent likers of a post
@@ -108,4 +128,11 @@ def get_likers(postID: int, dtsg: str, session_id: str):
   Returns:
     List (User): List of users object containing information about users who liked the post
   '''
+
+
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
   pass

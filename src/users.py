@@ -3,6 +3,9 @@ import requests
 from pydantic import Json
 from time import sleep
 import json
+import os
+from dotenv import load_dotenv
+
 from userSchemas import (
   Json1,
   Json2,
@@ -31,6 +34,8 @@ headers = {
     'sec-gpc': '1',
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
   }
+
+load_dotenv('.env')
 
 # -----------------------------------
 # DISCARDED CODE, DOESN'T WORK ANYMORE WITHOUT A FB_LSD HEADER
@@ -64,6 +69,47 @@ headers = {
 #   response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
 #   res = json.loads(response.text)
 #   return res
+
+
+# def get_posts(user_id):
+#   """
+#   Returns the most recent posts of a user by its internal user id
+#   """
+
+#   headers = {
+#     'Accept': '*/*',
+#     'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
+#     'Connection': 'keep-alive',
+#     'Content-Type': 'application/x-www-form-urlencoded',
+#     'Origin': 'https://www.threads.net',
+#     'Referer': 'https://www.threads.net',
+#     'Sec-Fetch-Dest': 'empty',
+#     'Sec-Fetch-Mode': 'cors',
+#     'Sec-Fetch-Site': 'same-origin',
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+#     'X-FB-LSD': 'CckP51ktiQJqnm9K9NKc9Z',
+#     'dpr': '1',
+#     'sec-ch-prefers-color-scheme': 'dark',
+#     'sec-ch-ua': '"Google Chrome";v="117", "Not;A=Brand";v="8", "Chromium";v="117"',
+#     'sec-ch-ua-full-version-list': '"Google Chrome";v="117.0.5938.150", "Not;A=Brand";v="8.0.0.0", "Chromium";v="117.0.5938.150"',
+#     'sec-ch-ua-mobile': '?0',
+#     'sec-ch-ua-model': '""',
+#     'sec-ch-ua-platform': '"Windows"',
+#     'sec-ch-ua-platform-version': '"10.0.0"',
+#     'viewport-width': '1704',
+#     # 'Cookie': 'csrftoken=rs0WHowG_ZMKdhoQqWc0uM; mid=ZSgNpgALAAHGMd_duJ8JKbjmqDJy',
+#   }
+#   data = {
+#     'lsd': 'CckP51ktiQJqnm9K9NKc9Z',
+#     'variables': f'{{"userID": "{user_id}"}}',
+#     'doc_id': '23980155134932173',
+#   }
+
+#   response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
+#   res = json.loads(response.text)
+#   return res
+
+
 # --------------------------------------------------------------------
 
 @singledispatch
@@ -81,7 +127,13 @@ def queryuser(arg, dtsg: str, session_id: str) -> Json:
   return arg
 
 @queryuser.register
-def _(arg: int, dtsg: str, session_id: str) -> Json:
+def _(arg: int, dtsg: str = None, session_id: str = None) -> Json:
+
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
 
   data = {
       'fb_dtsg': dtsg,
@@ -93,14 +145,22 @@ def _(arg: int, dtsg: str, session_id: str) -> Json:
   }
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  print(response.text)
-  res = Json1.model_validate_json(response.text)
-  return res.data.userData.user
+  
+  # res = Json1.model_validate_json(response.text)
+  res = response.text
+
+  return res
   
 
 @queryuser.register
-def _(arg: str, dtsg: str, session_id: str) -> Json:
+def _(arg: str, dtsg: str = None, session_id: str = None) -> Json:
   
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
+
   data = {
     'fb_dtsg': dtsg,
     'variables': f'{{"username":"{arg}"}}',
@@ -111,50 +171,11 @@ def _(arg: str, dtsg: str, session_id: str) -> Json:
   } 
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  print(response.text)
-  res = Json2.model_validate_json(response.text)
-  return res
+  # res = Json2.model_validate_json(response.text)
+  # res = json.loads(response.text)
+  return response.text
 
-
-def get_posts(user_id):
-  """
-  Returns the most recent posts of a user by its internal user id
-  """
-
-  headers = {
-    'Accept': '*/*',
-    'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
-    'Connection': 'keep-alive',
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Origin': 'https://www.threads.net',
-    'Referer': 'https://www.threads.net',
-    'Sec-Fetch-Dest': 'empty',
-    'Sec-Fetch-Mode': 'cors',
-    'Sec-Fetch-Site': 'same-origin',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
-    'X-FB-LSD': 'CckP51ktiQJqnm9K9NKc9Z',
-    'dpr': '1',
-    'sec-ch-prefers-color-scheme': 'dark',
-    'sec-ch-ua': '"Google Chrome";v="117", "Not;A=Brand";v="8", "Chromium";v="117"',
-    'sec-ch-ua-full-version-list': '"Google Chrome";v="117.0.5938.150", "Not;A=Brand";v="8.0.0.0", "Chromium";v="117.0.5938.150"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-model': '""',
-    'sec-ch-ua-platform': '"Windows"',
-    'sec-ch-ua-platform-version': '"10.0.0"',
-    'viewport-width': '1704',
-    # 'Cookie': 'csrftoken=rs0WHowG_ZMKdhoQqWc0uM; mid=ZSgNpgALAAHGMd_duJ8JKbjmqDJy',
-  }
-  data = {
-    'lsd': 'CckP51ktiQJqnm9K9NKc9Z',
-    'variables': f'{{"userID": "{user_id}"}}',
-    'doc_id': '23980155134932173',
-  }
-
-  response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
-  res = json.loads(response.text)
-  return res
-
-def get_posts(username, dtsg, session_id):
+def get_posts(username, dtsg: str = None, session_id: str = None):
   '''
   Returns the most recent posts of a user by its internal user id.
 
@@ -167,7 +188,16 @@ def get_posts(username, dtsg, session_id):
     Json: Most recent posts of the user inside the list "edges"
   '''
 
+
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
+
   profile = queryuser(username, dtsg, session_id)
+  print(profile)
+  profile = Json2.model_validate_json(profile)
   user_id = profile.data.xdt_user_by_username.pk
 
   data = {
@@ -183,7 +213,7 @@ def get_posts(username, dtsg, session_id):
   res = json.loads(response.text)
   return res
 
-def get_replys(username, dtsg, session_id):
+def get_replys(username, dtsg: str = None, session_id: str = None):
   '''
   Returns the most recent replys of a user to other user's posts
   and the posts it was originally replying.
@@ -200,7 +230,7 @@ def get_replys(username, dtsg, session_id):
   '''
   pass
 
-def get_reposts(username, dtsg, session_id):
+def get_reposts(username, dtsg: str = None, session_id: str = None):
   '''
   Returns the most recent posts of a user by its internal user id.
   Similar to get_posts but por reposted content from other users.
@@ -215,7 +245,7 @@ def get_reposts(username, dtsg, session_id):
   '''
   pass
 
-def scrap_all_posts(username: str, dtsg: str, session_id: str, limit:int = None, delay: int = 5):
+def scrap_all_posts(username: str, dtsg: str = None, session_id: str = None, limit:int = None, delay: int = 5):
   '''
   Returns all posts or the most recent ones up to a specified limit of
   certain user using its internal user_id to perform the recursive queries.
@@ -232,9 +262,17 @@ def scrap_all_posts(username: str, dtsg: str, session_id: str, limit:int = None,
     Json: All posts of the user contained in the "edges" list.
   '''
 
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
+
   profile = queryuser(username, dtsg, session_id)
 
-  user_id = profile["data"]["xdt_user_by_username"]["pk"]
+  profile = Json2.model_validate_json(profile)
+
+  user_id = profile.data.xdt_user_by_username.pk
 
   data = {
     'fb_dtsg': dtsg,
@@ -274,7 +312,7 @@ def scrap_all_posts(username: str, dtsg: str, session_id: str, limit:int = None,
   print(len(res["data"]["mediaData"]["edges"]))
   return res
 
-def scrap_all_reposts(username: str, dtsg: str, session_id: str, limit:int = None, delay: int = 5):
+def scrap_all_reposts(username: str, dtsg: str = None, session_id: str = None, limit:int = None, delay: int = 5):
   '''
   Returns all posts or the most recent ones up to a specified limit of
   certain user using its internal user_id to perform the recursive queries.
@@ -294,7 +332,7 @@ def scrap_all_reposts(username: str, dtsg: str, session_id: str, limit:int = Non
   '''
   pass
 
-def scrap_all_replys(username: str, dtsg: str, session_id: str, limit:int = None, delay: int = 5):
+def scrap_all_replys(username: str, dtsg: str = None, session_id: str = None, limit:int = None, delay: int = 5):
   '''
   Crawls all replys of a user to other user's posts
   and the original posts it was replying.
@@ -313,7 +351,7 @@ def scrap_all_replys(username: str, dtsg: str, session_id: str, limit:int = None
   '''
   pass
 
-def get_follows_info(username: str, dtsg: str, session_id: str):
+def get_follows_info(username: str, dtsg: str = None, session_id: str = None):
   '''
   Returns an overview information of the number of followers and following of an account
   Using the internal userID to perform the query.
@@ -327,6 +365,11 @@ def get_follows_info(username: str, dtsg: str, session_id: str):
     Json: total_followers_count, total_follow_count and total_pending_follow_count
   '''
 
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
   
   profile = queryuser(username, dtsg, session_id)
 
@@ -346,7 +389,7 @@ def get_follows_info(username: str, dtsg: str, session_id: str):
 
   return FollowsInfo.model_validate_json(response.text).data.counts
 
-def get_followers(username: int, dtsg: str, session_id: str):
+def get_followers(username: int, dtsg: str = None, session_id: str = None):
 
   '''
   Collects the latest users who followed an account likers of a post
@@ -363,7 +406,7 @@ def get_followers(username: int, dtsg: str, session_id: str):
   '''
   pass
 
-def get_following(username: int, dtsg: str, session_id: str):
+def get_following(username: int, dtsg: str = None, session_id: str = None):
 
   '''
   Collects the most recent follows an account followed.

@@ -1,5 +1,5 @@
 
-def search_users(query: str, dtsg: str, session_id: str):
+def search_users(query: str, dtsg: str = None, session_id: str = None):
   '''
   Searches user by the specified query.
 
@@ -14,7 +14,7 @@ def search_users(query: str, dtsg: str, session_id: str):
   pass
 
 
-def search_posts(query: str, dtsg: str, session_id: str, limit: int = 10, delay: int = 5):
+def search_posts(query: str, dtsg: str = None, session_id: str = None, limit: int = 10, delay: int = 5):
   '''
   Performs a search of posts matching the query or posted by users whose username
   matches the query
