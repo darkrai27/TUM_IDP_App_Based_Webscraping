@@ -1,31 +1,214 @@
-{
+'{
   "data": {
-    "xdt_user_by_username": {
-      "username": "hideo_kojima",
-      "pk": "6937567427",
-      "hd_profile_pic_versions": [
+    "mediaData": {
+      "edges": [
         {
-          "height": 320,
-          "url": "https://scontent.cdninstagram.com/v/t51.2885-19/358544206_966103927846296_3853859317177676853_n.jpg?stp=dst-jpg_s320x320&_nc_ht=scontent.cdninstagram.com&_nc_cat=100&_nc_ohc=E9Jh0v1-YPcAX-Ux7K7&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfCPkQAty16UCqby_3HydEKLExUsNs2tHTlwwiRUsGY2kA&oe=65435388&_nc_sid=10d13b",
-          "width": 320
+          "node": {
+            "thread_items": [
+              {
+                "post": {
+                  "user": {
+                    "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/358048015_229528626689864_5759383576883175175_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=108&_nc_ohc=YAsrjco5jUEAX8KMFDK&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfARmToZmLNnF9cRzHWKJAPuqId6CbKfFNfzhvgZ8ZkJcw&oe=6542CD6B&_nc_sid=10d13b",
+                    "username": "playoverwatch",
+                    "friendship_status": {
+                      "following": false,
+                      "muting": false,
+                      "blocking": null
+                    },
+                    "pk": "3185509068",
+                    "transparency_label": null,
+                    "transparency_product": null,
+                    "transparency_product_enabled": false,
+                    "is_verified": true,
+                    "id": null,
+                    "text_post_app_is_private": false,
+                    "text_post_app_has_max_posts_pinned_to_profile": null
+                  },
+                  "accessibility_caption": null,
+                  "original_height": 612,
+                  "original_width": 612,
+                  "image_versions2": {
+                    "candidates": []
+                  },
+                  "code": "CuVXGXsPgIb",
+                  "video_versions": null,
+                  "carousel_media": null,
+                  "giphy_media_info": null,
+                  "pk": "3140517907985728027",
+                  "is_fb_only": null,
+                  "is_internal_only": null,
+                  "text_post_app_info": {
+                    "share_info": {
+                      "can_quote_post": true,
+                      "can_repost": true,
+                      "is_reposted_by_viewer": false,
+                      "repost_restricted_reason": null,
+                      "__typename": "XDTShareInfo",
+                      "reposted_post": null,
+                      "quoted_post": null
+                    },
+                    "is_reply": false,
+                    "can_reply": true,
+                    "hush_info": null,
+                    "reply_control": "everyone",
+                    "pinned_post_info": null,
+                    "link_preview_attachment": null,
+                    "reply_to_author": null,
+                    "is_post_unavailable": false,
+                    "post_unavailable_reason": null,
+                    "impression_count": null
+                  },
+                  "id": "3140517907985728027_3185509068",
+                  "media_type": 19,
+                  "has_audio": null,
+                  "audio": null,
+                  "transcription_data": null,
+                  "caption_is_edited": false,
+                  "has_liked": false,
+                  "like_and_view_counts_disabled": false,
+                  "taken_at": 1688598930,
+                  "caption": {
+                    "text": "Winton"
+                  },
+                  "is_paid_partnership": null,
+                  "caption_add_on": null,
+                  "text_with_entities": null,
+                  "like_count": 3261,
+                  "media_overlay_info": null
+                },
+                "line_type": "squiggle",
+                "view_replies_cta_string": "206 respuestas",
+                "reply_facepile_users": [
+                  {
+                    "__typename": "XDTUserDict",
+                    "id": null,
+                    "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/377517161_1832449490504032_5402400569223835584_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=104&_nc_ohc=2HPqlZRHG8EAX_eVUk0&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAeJwK3zk23XllPehj-ZO-rh9xfWmmVaooqU31snUN9yw&oe=65435C5A&_nc_sid=10d13b"
+                  },
+                  {
+                    "__typename": "XDTUserDict",
+                    "id": null,
+                    "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/358357813_596967115907605_3664336068338630619_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=101&_nc_ohc=kLmH6rEWfiwAX9qDSkL&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfDXqFq1nMsx9BCj2xBzQEYND8VjMZihA4PXSu2o8ZP0WQ&oe=65447C9D&_nc_sid=10d13b"
+                  },
+                  {
+                    "__typename": "XDTUserDict",
+                    "id": null,
+                    "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/357997430_279492744749424_4043106525800812131_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=100&_nc_ohc=iaCs0KoLXnQAX_Re-G0&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAcPMS1HjByf8UFLcE_ze5vGyGN5tlDzGrVcFq9jXk7FQ&oe=654397EE&_nc_sid=10d13b"
+                  }
+                ],
+                "should_show_replies_cta": true,
+                "__typename": "XDTThreadItem"
+              },
+              {
+                "post": {
+                  "user": {
+                    "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/358342896_134138973038748_2871278261242540091_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=100&_nc_ohc=Hz5dFlQuavgAX9HpDSu&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAg1WEz0F43jlpOXtVWjuRpowrsFmgAZupQalls4ACYog&oe=65438A9A&_nc_sid=10d13b",
+                    "username": "battlenet",
+                    "friendship_status": {
+                      "following": false,
+                      "muting": false,
+                      "blocking": null
+                    },
+                    "pk": "45512948387",
+                    "transparency_label": null,
+                    "transparency_product": null,
+                    "transparency_product_enabled": false,
+                    "is_verified": true,
+                    "id": null,
+                    "text_post_app_is_private": false,
+                    "text_post_app_has_max_posts_pinned_to_profile": null
+                  },
+                  "accessibility_caption": null,
+                  "original_height": 612,
+                  "original_width": 612,
+                  "image_versions2": {
+                    "candidates": []
+                  },
+                  "code": "CuVZQFcvVS5",
+                  "video_versions": null,
+                  "carousel_media": null,
+                  "giphy_media_info": null,
+                  "pk": "3140527371686073529",
+                  "is_fb_only": null,
+                  "is_internal_only": null,
+                  "text_post_app_info": {
+                    "share_info": {
+                      "can_quote_post": true,
+                      "can_repost": true,
+                      "is_reposted_by_viewer": false,
+                      "repost_restricted_reason": null,
+                      "__typename": "XDTShareInfo",
+                      "reposted_post": null,
+                      "quoted_post": null
+                    },
+                    "is_reply": true,
+                    "can_reply": true,
+                    "hush_info": null,
+                    "reply_control": "everyone",
+                    "pinned_post_info": null,
+                    "link_preview_attachment": null,
+                    "reply_to_author": {
+                      "username": "playoverwatch",
+                      "id": null
+                    },
+                    "is_post_unavailable": false,
+                    "post_unavailable_reason": null,
+                    "impression_count": null
+                  },
+                  "id": "3140527371686073529_45512948387",
+                  "media_type": 19,
+                  "has_audio": null,
+                  "audio": null,
+                  "transcription_data": null,
+                  "caption_is_edited": false,
+                  "has_liked": false,
+                  "like_and_view_counts_disabled": false,
+                  "taken_at": 1688600058,
+                  "caption": {
+                    "text": "Winton"
+                  },
+                  "is_paid_partnership": null,
+                  "caption_add_on": null,
+                  "text_with_entities": null,
+                  "like_count": 47,
+                  "media_overlay_info": null
+                },
+                "line_type": "line",
+                "view_replies_cta_string": "2 respuestas",
+                "reply_facepile_users": [
+                  {
+                    "__typename": "XDTUserDict",
+                    "id": null,
+                    "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/358161797_305972968452972_832689367312755920_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=100&_nc_ohc=YnViV9fqe78AX_KJNGN&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfBWhQZqy_StJDCmOpXRqgY3x2EM_sEZ68rMWeiGlqIokw&oe=654437E1&_nc_sid=10d13b"
+                  },
+                  {
+                    "__typename": "XDTUserDict",
+                    "id": null,
+                    "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/358013609_172582599008367_6330898646410929603_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=103&_nc_ohc=cYbjvRtneQ8AX9mgxXN&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfAojJg4QeAmzLH5B-c4o47ZPnGemBut5FxsLmwvqaAL3Q&oe=6543CE59&_nc_sid=10d13b"
+                  }
+                ],
+                "should_show_replies_cta": true,
+                "__typename": "XDTThreadItem"
+              }
+            ],
+            "id": "3140527371686073529",
+            "__typename": "XDTThread"
+          },
+          "__typename": "XDTUserTextPostsResponseEdge",
+          "cursor": ""
         }
       ],
-      "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/358544206_966103927846296_3853859317177676853_n.jpg?stp=dst-jpg_s150x150&_nc_ht=scontent.cdninstagram.com&_nc_cat=100&_nc_ohc=E9Jh0v1-YPcAX-Ux7K7&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfD1nNKWq3Xeo7xa8tONZ1ihQJ_Pna4MnwDxi0y9TmMgaQ&oe=65435388&_nc_sid=10d13b",
-      "biography": "Game Creator: 70% of my body is made of movies.\nゲームデザイナー：僕の体の70%は映画でできている",
-      "biography_with_entities": {
-        "entities": [],
-        "raw_text": "Game Creator: 70% of my body is made of movies.\nゲームデザイナー：僕の体の70%は映画でできている"
-      },
-      "follower_count": 426484,
-      "profile_context_facepile_users": null,
-      "text_post_app_is_private": false,
-      "friendship_status": null,
-      "full_name": "Hideo Kojima",
-      "is_verified": true,
-      "id": "6937567427"
+      "page_info": {
+        "end_cursor": null,
+        "has_next_page": false,
+        "has_previous_page": false,
+        "start_cursor": null
+      }
+    },
+    "hideLikesSettingData": {
+      "hide_like_and_view_counts": false
     }
   },
   "extensions": {
     "is_final": true
   }
-}
+}'

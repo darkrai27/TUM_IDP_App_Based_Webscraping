@@ -37,81 +37,6 @@ headers = {
 
 load_dotenv('.env')
 
-# -----------------------------------
-# DISCARDED CODE, DOESN'T WORK ANYMORE WITHOUT A FB_LSD HEADER
-# @singledispatch
-# def queryuser(arg):
-#   """
-#   Returns a user profile by its user internal id (number) or it's username (string) if matched
-#   """
-#   return arg
-
-# @queryuser.register
-# def _(arg: int):
-#   data = {
-#       'variables': f'{{"userID": "{arg}"}}',
-#       'doc_id': '6298858840243790',
-#   }
-
-#   response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
-#   res = json.loads(response.text)
-#   return res
-  
-
-# @queryuser.register
-# def _(arg: str):
-  
-#   data = {
-#     'variables': f'{{"username":"{arg}"}}',
-#     'doc_id': '6422182904495995',
-#   }
-
-#   response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
-#   res = json.loads(response.text)
-#   return res
-
-
-# def get_posts(user_id):
-#   """
-#   Returns the most recent posts of a user by its internal user id
-#   """
-
-#   headers = {
-#     'Accept': '*/*',
-#     'Accept-Language': 'es-ES,es;q=0.9,en;q=0.8',
-#     'Connection': 'keep-alive',
-#     'Content-Type': 'application/x-www-form-urlencoded',
-#     'Origin': 'https://www.threads.net',
-#     'Referer': 'https://www.threads.net',
-#     'Sec-Fetch-Dest': 'empty',
-#     'Sec-Fetch-Mode': 'cors',
-#     'Sec-Fetch-Site': 'same-origin',
-#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
-#     'X-FB-LSD': 'CckP51ktiQJqnm9K9NKc9Z',
-#     'dpr': '1',
-#     'sec-ch-prefers-color-scheme': 'dark',
-#     'sec-ch-ua': '"Google Chrome";v="117", "Not;A=Brand";v="8", "Chromium";v="117"',
-#     'sec-ch-ua-full-version-list': '"Google Chrome";v="117.0.5938.150", "Not;A=Brand";v="8.0.0.0", "Chromium";v="117.0.5938.150"',
-#     'sec-ch-ua-mobile': '?0',
-#     'sec-ch-ua-model': '""',
-#     'sec-ch-ua-platform': '"Windows"',
-#     'sec-ch-ua-platform-version': '"10.0.0"',
-#     'viewport-width': '1704',
-#     # 'Cookie': 'csrftoken=rs0WHowG_ZMKdhoQqWc0uM; mid=ZSgNpgALAAHGMd_duJ8JKbjmqDJy',
-#   }
-#   data = {
-#     'lsd': 'CckP51ktiQJqnm9K9NKc9Z',
-#     'variables': f'{{"userID": "{user_id}"}}',
-#     'doc_id': '23980155134932173',
-#   }
-
-#   response = requests.post('https://www.threads.net/api/graphql', headers=headers, data=data)
-#   res = json.loads(response.text)
-#   return res
-
-
-# --------------------------------------------------------------------
-
 @singledispatch
 def queryuser(arg, dtsg: str, session_id: str) -> Json:
   """
@@ -196,7 +121,6 @@ def get_posts(username, dtsg: str = None, session_id: str = None):
     session_id = os.getenv("SESSION")
 
   profile = queryuser(username, dtsg, session_id)
-  print(profile)
   profile = Json2.model_validate_json(profile)
   user_id = profile.data.xdt_user_by_username.pk
 
@@ -228,7 +152,29 @@ def get_replys(username, dtsg: str = None, session_id: str = None):
     List[Edge]: List of "Edges" objects containing in each node at least 2 "thread items" being the first
     a post by other user and the seconf the reply from the specified user
   '''
-  pass
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
+
+  profile = queryuser(username, dtsg, session_id)
+  profile = Json2.model_validate_json(profile)
+  user_id = profile.data.xdt_user_by_username.pk
+
+  data = {
+    'fb_dtsg': dtsg,
+    'variables': f'{{"userID":"{user_id}","__relay_internal__pv__BarcelonaIsPollsConsumptionEnabledrelayprovider":true,"__relay_internal__pv__BarcelonaIsLoggedInrelayprovider":true,"__relay_internal__pv__BarcelonaIsFeedbackHubEnabledrelayprovider":false,"__relay_internal__pv__BarcelonaIsViewCountEnabledrelayprovider":false}}',
+    'doc_id': '24067823902863248',
+  }
+
+  cookies = {
+    'sessionid': session_id,
+  }
+
+  response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
+
+  return response.text
 
 def get_reposts(username, dtsg: str = None, session_id: str = None):
   '''
@@ -243,7 +189,30 @@ def get_reposts(username, dtsg: str = None, session_id: str = None):
   Returns:
     Json: Most recent posts of the user inside the list "edges"
   '''
-  pass
+  if dtsg == None:
+    dtsg = os.getenv("DTSG")
+  
+  if session_id == None:
+    session_id = os.getenv("SESSION")
+
+  profile = queryuser(username, dtsg, session_id)
+  print(profile)
+  profile = Json2.model_validate_json(profile)
+  user_id = profile.data.xdt_user_by_username.pk
+
+  data = {
+    'fb_dtsg': dtsg,
+    'variables': f'{{"userID":"{user_id}","__relay_internal__pv__BarcelonaIsPollsConsumptionEnabledrelayprovider":false,"__relay_internal__pv__BarcelonaIsLoggedInrelayprovider":true,"__relay_internal__pv__BarcelonaIsFeedbackHubEnabledrelayprovider":false,"__relay_internal__pv__BarcelonaIsViewCountEnabledrelayprovider":false}}',
+    'doc_id': '5903296406439337',
+  }
+
+  cookies = {
+    'sessionid': session_id,
+  }
+
+  response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
+
+  return response.text
 
 def scrap_all_posts(username: str, dtsg: str = None, session_id: str = None, limit:int = None, delay: int = 5):
   '''
@@ -351,7 +320,7 @@ def scrap_all_replys(username: str, dtsg: str = None, session_id: str = None, li
   '''
   pass
 
-def get_follows_info(username: str, dtsg: str = None, session_id: str = None):
+def get_follows_info(username: str, dtsg: str = None, session_id: str = None) -> str:
   '''
   Returns an overview information of the number of followers and following of an account
   Using the internal userID to perform the query.
@@ -372,6 +341,7 @@ def get_follows_info(username: str, dtsg: str = None, session_id: str = None):
     session_id = os.getenv("SESSION")
   
   profile = queryuser(username, dtsg, session_id)
+  profile = Json2.model_validate_json(profile)
 
   user_id = profile.data.xdt_user_by_username.pk
 
@@ -387,7 +357,7 @@ def get_follows_info(username: str, dtsg: str = None, session_id: str = None):
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
 
-  return FollowsInfo.model_validate_json(response.text).data.counts
+  return response.text
 
 def get_followers(username: int, dtsg: str = None, session_id: str = None):
 
