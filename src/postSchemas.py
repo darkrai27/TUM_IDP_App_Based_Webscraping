@@ -97,7 +97,7 @@ class Post(BaseModel):
     taken_at: int = Field(description="Timestamp when the thread was posted.")
     caption: Optional[Caption] = Field(None, description="Text in the post, if any")
     like_count: int = Field(description="Amount of likes in the post.")
-    media_overlay_info: Optional[bool]
+    media_overlay_info: Optional[bool] = None
 
 class ReplyFacepileUsers(BaseModel):
     pass

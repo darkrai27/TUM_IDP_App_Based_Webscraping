@@ -12,6 +12,11 @@ def extract_captions(edges: List[Edge]):
   captions = []
   for edge in edges:
     for item in edge.node.thread_items:
+      repost = item.post.text_post_app_info.share_info.reposted_post
+      if repost is not None:
+        if repost.caption is not None:
+          if repost.caption.text is not None:
+            captions.append(repost.caption.text)
       if item.post.caption is not None:
         if item.post.caption.text is not None:
           captions.append(item.post.caption.text)
