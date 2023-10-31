@@ -1,12 +1,15 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional
 from userSchemas import FriendshipStatus, User, UserBase, Image
+from typing import ForwardRef
+
 
 class ImageVersions2(BaseModel):
-    candidates: List[Image]
+    candidates: List[Image] = Field(description="List of candidates as media previews/thumbnails")
 
 class VideoVersions(BaseModel):
-    pass
+    type: int =  Field(None, description="Numeric value stating the type of video. 101,102 and 103 seem equivalent.")
+    url: str = Field(None, description="URL to the video file")
 
 class Audio(BaseModel):
     audio_src: str = Field(description="URL to the audio file")
@@ -23,14 +26,33 @@ class CarouselMedia(BaseModel):
     id: str
     code: Optional[str] = None
 
+class PinnedPostInfo(BaseModel):
+    can_viewer_pin_to_profile : Optional[bool] = False
+    can_viewer_unpin_from_profile : Optional[bool] = False
+    can_viewer_pin_to_parent_post : Optional[bool] = False
+    can_viewer_unpin_from_parent_post : Optional[bool] = False
+    is_pinned_to_profile : Optional[bool] = False
+    is_pinned_to_parent_pos : Optional[bool] = False
+
+# Allows us to use Post in ShareInfo before it's defined
+# So we can have a Post object inside a Post object (repost)
+PostForwardRef = ForwardRef("Post")
+
 class ShareInfo(BaseModel):
     can_quote_post: Optional[bool] = None
     can_repost: bool
     is_reposted_by_viewer: bool
     repost_restricted_reason: Optional[bool] = None
     # __typename: str
-    reposted_post: Optional[bool] = None
+    reposted_post: Optional[PostForwardRef] = None
     quoted_post: Optional[bool] = None
+
+class LinkPreviewAttachment(BaseModel):
+    display_url: str
+    favicon_url: Optional[str]
+    image_url: Optional[str] = Field(description="Url to the image preview / thumbnal")
+    title: str = Field(description="Title of the link")
+    url: str  
 
 class TextPostAppInfo(BaseModel):
     share_info: ShareInfo
@@ -38,8 +60,8 @@ class TextPostAppInfo(BaseModel):
     is_reply: bool
     hush_info: Optional[bool] = None
     reply_control: str
-    pinned_post_info: Optional[bool] = None
-    link_preview_attachment: Optional[bool] = None
+    pinned_post_info: Optional[PinnedPostInfo] = None
+    link_preview_attachment: Optional[LinkPreviewAttachment] = None
     reply_to_author: Optional[UserBase] = None
     is_post_unavailable: bool
     post_unavailable_reason: Optional[bool] = None
@@ -53,10 +75,10 @@ class Post(BaseModel):
     accessibility_caption: Optional[str] = Field(None, description="Caption describing the media present in the post if any.")
     original_height: Optional[int] = Field(612) 
     original_width: Optional[int] = Field(612)
-    image_versions2: ImageVersions2
+    image_versions2: ImageVersions2 = Field(description="Image/s previews of the media (if any) in the post. No matter wether is a video or a picture.")
     code: str = Field(description="Internal code for the post URL. Can be watched in the browser by accessing http://threads.net/t/{code}")
-    video_versions: Optional[VideoVersions] = None
-    carousel_media: Optional[List[CarouselMedia]] = Field(...,description="List of all media present in the post.")
+    video_versions: Optional[List[VideoVersions]] = None
+    carousel_media: Optional[List[CarouselMedia]] = Field(...,description="List of all media present in the post when multiples are present.")
     giphy_media_info: Optional[bool] = None
     pk: str
     text_post_app_info: TextPostAppInfo
@@ -100,8 +122,8 @@ class Node(BaseModel):
 class PageInfo(BaseModel):
     has_next_page: bool
     has_previous_page: bool
-    end_cursor: Optional[bool] = None
-    start_cursor: Optional[bool] = None
+    end_cursor: Optional[str] = Field(description="Cursor pointing the the last post in the page, useful to query the next batch of posts.")
+    start_cursor: Optional[bool] = Field(description="Cursor pointing the the first post in the current batch.")
 
 class Edge(BaseModel):
     node: Node
@@ -115,7 +137,7 @@ class HideLikesSettingData(BaseModel):
     hide_like_and_view_counts: bool
 
 class WrapperData(BaseModel):
-    data: ThreadsData
+    mediaData: ThreadsData
     hideLikesSettingData: HideLikesSettingData
 
 class Extensions(BaseModel):
@@ -123,4 +145,12 @@ class Extensions(BaseModel):
 
 class JsonPosts(BaseModel):
     data: WrapperData
+    extensions: Extensions
+
+class WrapperData2(BaseModel):
+    data: ThreadsData
+    hideLikesSettingData: HideLikesSettingData
+
+class JsonSinglePost(BaseModel):
+    data: WrapperData2
     extensions: Extensions

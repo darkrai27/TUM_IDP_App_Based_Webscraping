@@ -6,7 +6,8 @@ import json
 import os
 from dotenv import load_dotenv
 
-from postSchemas import JsonPosts
+from postSchemas import (JsonPosts, JsonSinglePost)
+
 load_dotenv()
 
 # headers = {
@@ -86,9 +87,9 @@ def get_post(postID: int, dtsg: str = None, session_id: str = None):
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
 
   print(response.text)
-  return JsonPosts.model_validate_json(response.text).data.data.edges
+  return JsonSinglePost.model_validate_json(response.text).data.data.edges
 
-def get_post(postID: int, dtsg: str = None, session_id: str = None, limit: int = None, delay: int = 5):
+def crawl_post(postID: int, dtsg: str = None, session_id: str = None, limit: int = None, delay: int = 5):
 
   '''
   Gets a thread with all its posts and crawls recursively all the replies up to the stablished limit.
