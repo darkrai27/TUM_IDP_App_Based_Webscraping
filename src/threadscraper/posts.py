@@ -6,7 +6,7 @@ import json
 import os
 from dotenv import load_dotenv
 
-from postSchemas import (JsonPosts, JsonSinglePost)
+from threadscraper.postSchemas import (JsonPosts, JsonSinglePost)
 
 load_dotenv()
 

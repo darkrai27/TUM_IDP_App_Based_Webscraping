@@ -6,13 +6,13 @@ import json
 import os
 from dotenv import load_dotenv
 
-from userSchemas import (
+from threadscraper.userSchemas import (
   Json1,
   Json2,
   FollowsInfo
 )
 
-from postSchemas import (
+from threadscraper.postSchemas import (
   JsonPosts
 )
 

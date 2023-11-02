@@ -1,8 +1,8 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from userSchemas import FriendshipStatus, User, UserBase, Image
 from typing import ForwardRef
 
+from threadscraper.userSchemas import FriendshipStatus, User, UserBase, Image
 
 class ImageVersions2(BaseModel):
     candidates: List[Image] = Field(description="List of candidates as media previews/thumbnails")

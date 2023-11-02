@@ -1,3 +1,30 @@
+import requests
+import json
+from time import sleep
+from dotenv import load_dotenv
+import os
+from users import queryuser
+from userSchemas import Json2
+
+load_dotenv()
+headers = {
+  'authority': 'www.threads.net',
+  'accept': '*/*',
+  'accept-language': 'es-ES,es;q=0.7',
+  'content-type': 'application/x-www-form-urlencoded',
+  'origin': 'https://www.threads.net',
+  'referer': 'https://www.threads.net/search',
+  'sec-ch-ua': '"Chromium";v="116", "Not)A;Brand";v="24", "Brave";v="116"',
+  'sec-ch-ua-mobile': '?0',
+  'sec-ch-ua-model': '""',
+  'sec-ch-ua-platform': '"macOS"',
+  'sec-ch-ua-platform-version': '"13.4.0"',
+  'sec-fetch-dest': 'empty',
+  'sec-fetch-mode': 'cors',
+  'sec-fetch-site': 'same-origin',
+  'sec-gpc': '1',
+  'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36'
+}
 
 # users.py
 def scrap_all_posts(username: str, dtsg: str = None, session_id: str = None, limit:int = None, delay: int = 5):

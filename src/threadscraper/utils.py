@@ -1,6 +1,6 @@
 import json
 from typing import List
-from postSchemas import Edge
+from threadscraper.postSchemas import Edge
 
 def extract_captions(edges: List[Edge]):
   """
