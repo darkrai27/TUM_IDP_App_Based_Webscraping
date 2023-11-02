@@ -16,20 +16,9 @@ treads_scraper.users
 
 .. autofunction:: users.get_replys
 
+.. **get_reposts**
+
 .. autofunction:: users.get_reposts
-
-.. **scrap_all_posts**
-
-.. autofunction:: users.scrap_all_posts
-
-.. **scrap_all_replys**
-
-.. autofunction:: users.scrap_all_replys
-
-.. **scrap_all_reposts**
-
-.. autofunction:: users.scrap_all_reposts
-
 
 .. **get_follows_info**
 
@@ -43,9 +32,13 @@ treads_scraper.users
 
 .. autofunction:: users.get_following
 
-.. **get_post**
+.. **crawl_all**
+
+.. autofunction:: users.crawl_all
 
 threads_scraper.posts
+
+.. **get_post**
 
 .. autofunction:: posts.get_post
 
