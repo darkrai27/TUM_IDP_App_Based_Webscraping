@@ -8,7 +8,7 @@ To use Threads Scraper, first install it using pip:
 
 .. code-block:: console
 
-  $ pip install threads-scraper
+  $ pip install threadscraper
 
 
 Session verification

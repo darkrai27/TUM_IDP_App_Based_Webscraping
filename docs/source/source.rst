@@ -1,7 +1,7 @@
 Source
 ======
 
-treadsscraper.users
+treadscraper.users
 --------------------
 
 .. **query_user**
@@ -36,25 +36,40 @@ treadsscraper.users
 
 .. autofunction:: threadscraper.users.crawl_all
 
-threads_scraper.posts
+threadscraper.posts
+----------------------
 
 .. **get_post**
 
 .. autofunction:: threadscraper.posts.get_post
 
+.. **get_basic_info**
+
+.. autofunction:: threadscraper.posts.get_basic_info
+
 .. **get_likers**
 
 .. autofunction:: threadscraper.posts.get_likers
 
+.. **download_media**
+
+.. autofunction:: threadscraper.posts.download_media
+
+.. **crawl_post**
+
+.. autofunction:: threadscraper.posts.crawl_post
+
 .. **search_users**
 
-threads_scraper.search
+threadscraper.search
+-----------------------
 
 .. autofunction:: threadscraper.search.search_users
 
 .. **search_posts**
 
 .. autofunction:: threadscraper.search.search_posts
+
 
 
 
