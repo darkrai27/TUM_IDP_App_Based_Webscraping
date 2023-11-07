@@ -1,67 +1,75 @@
 Source
 ======
 
-treads_scraper.users
+treadscraper.users
 --------------------
 
 .. **query_user**
 
-.. autofunction:: users.queryuser
+.. autofunction:: threadscraper.users.queryuser
 
 .. **get_posts**
 
-.. autofunction:: users.get_posts
+.. autofunction:: threadscraper.users.get_posts
 
 .. **get_replys**
 
-.. autofunction:: users.get_replys
+.. autofunction:: threadscraper.users.get_replys
 
-.. autofunction:: users.get_reposts
+.. **get_reposts**
 
-.. **scrap_all_posts**
-
-.. autofunction:: users.scrap_all_posts
-
-.. **scrap_all_replys**
-
-.. autofunction:: users.scrap_all_replys
-
-.. **scrap_all_reposts**
-
-.. autofunction:: users.scrap_all_reposts
-
+.. autofunction:: threadscraper.users.get_reposts
 
 .. **get_follows_info**
 
-.. autofunction:: users.get_follows_info
+.. autofunction:: threadscraper.users.get_follows_info
 
 .. **get_followers**
 
-.. autofunction:: users.get_followers
+.. autofunction:: threadscraper.users.get_followers
 
 .. **get_following**
 
-.. autofunction:: users.get_following
+.. autofunction:: threadscraper.users.get_following
+
+.. **crawl_all**
+
+.. autofunction:: threadscraper.users.crawl_all
+
+threadscraper.posts
+----------------------
 
 .. **get_post**
 
-threads_scraper.posts
+.. autofunction:: threadscraper.posts.get_post
 
-.. autofunction:: posts.get_post
+.. **get_basic_info**
+
+.. autofunction:: threadscraper.posts.get_basic_info
 
 .. **get_likers**
 
-.. autofunction:: posts.get_likers
+.. autofunction:: threadscraper.posts.get_likers
+
+.. **download_media**
+
+.. autofunction:: threadscraper.posts.download_media
+
+.. **crawl_post**
+
+.. autofunction:: threadscraper.posts.crawl_post
 
 .. **search_users**
 
-threads_scraper.search
+threadscraper.search
+-----------------------
 
-.. autofunction:: search.search_users
+.. autofunction:: threadscraper.search.search_users
 
 .. **search_posts**
 
-.. autofunction:: search.search_posts
+.. autofunction:: threadscraper.search.search_posts
+
 
 
 
@@ -69,58 +77,58 @@ threads_scraper.search
 User Schemas
 ------------
 
-.. autopydantic_model:: userSchemas.Image
+.. autopydantic_model:: threadscraper.userSchemas.Image
     
 
-.. autopydantic_model:: userSchemas.FriendshipStatus
+.. autopydantic_model:: threadscraper.userSchemas.FriendshipStatus
     
 
-.. autopydantic_model:: userSchemas.FriendShipStatusComplete
+.. autopydantic_model:: threadscraper.userSchemas.FriendShipStatusComplete
     
 
-.. autopydantic_model:: userSchemas.BiographyWithEntities
+.. autopydantic_model:: threadscraper.userSchemas.BiographyWithEntities
     
 
-.. autopydantic_model:: userSchemas.BioLink
+.. autopydantic_model:: threadscraper.userSchemas.BioLink
     
 
-.. autopydantic_model:: userSchemas.UserBase
+.. autopydantic_model:: threadscraper.userSchemas.UserBase
     
 
-.. autopydantic_model:: userSchemas.User
+.. autopydantic_model:: threadscraper.userSchemas.User
     
 
-.. autopydantic_model:: userSchemas.UserComplete
+.. autopydantic_model:: threadscraper.userSchemas.UserComplete
     
 
-.. autopydantic_model:: userSchemas.UserData
+.. autopydantic_model:: threadscraper.userSchemas.UserData
     
 
-.. autopydantic_model:: userSchemas.Data
+.. autopydantic_model:: threadscraper.userSchemas.Data
     
 
-.. autopydantic_model:: userSchemas.Extensions
+.. autopydantic_model:: threadscraper.userSchemas.Extensions
     
 
-.. autopydantic_model:: userSchemas.Json1
+.. autopydantic_model:: threadscraper.userSchemas.Json1
     
 
-.. autopydantic_model:: userSchemas.Data2
+.. autopydantic_model:: threadscraper.userSchemas.Data2
     
 
-.. autopydantic_model:: userSchemas.Json2
+.. autopydantic_model:: threadscraper.userSchemas.Json2
     
 
-.. autopydantic_model:: userSchemas.UserFollowsData
+.. autopydantic_model:: threadscraper.userSchemas.UserFollowsData
     
 
-.. autopydantic_model:: userSchemas.FollowsCounts
+.. autopydantic_model:: threadscraper.userSchemas.FollowsCounts
     
 
-.. autopydantic_model:: userSchemas.FollowsData
+.. autopydantic_model:: threadscraper.userSchemas.FollowsData
     
 
-.. autopydantic_model:: userSchemas.FollowsInfo
+.. autopydantic_model:: threadscraper.userSchemas.FollowsInfo
     
 
 
@@ -128,56 +136,56 @@ User Schemas
 Post Schemas
 ------------
 
-.. autopydantic_model:: postSchemas.ImageVersions2
+.. autopydantic_model:: threadscraper.postSchemas.ImageVersions2
     
 
-.. autopydantic_model:: postSchemas.VideoVersions
+.. autopydantic_model:: threadscraper.postSchemas.VideoVersions
     
 
-.. autopydantic_model:: postSchemas.CarouselMedia
+.. autopydantic_model:: threadscraper.postSchemas.CarouselMedia
     
 
-.. autopydantic_model:: postSchemas.ShareInfo
+.. autopydantic_model:: threadscraper.postSchemas.ShareInfo
     
 
-.. autopydantic_model:: postSchemas.TextPostAppInfo
+.. autopydantic_model:: threadscraper.postSchemas.TextPostAppInfo
     
 
-.. autopydantic_model:: postSchemas.Caption
+.. autopydantic_model:: threadscraper.postSchemas.Caption
     
 
-.. autopydantic_model:: postSchemas.Post
+.. autopydantic_model:: threadscraper.postSchemas.Post
     
 
-.. autopydantic_model:: postSchemas.ReplyFacepileUsers
+.. autopydantic_model:: threadscraper.postSchemas.ReplyFacepileUsers
     
 
-.. autopydantic_model:: postSchemas.ThreadItems
+.. autopydantic_model:: threadscraper.postSchemas.ThreadItems
     
 
-.. autopydantic_model:: postSchemas.Header
+.. autopydantic_model:: threadscraper.postSchemas.Header
     
 
-.. autopydantic_model:: postSchemas.Node
+.. autopydantic_model:: threadscraper.postSchemas.Node
     
 
-.. autopydantic_model:: postSchemas.PageInfo
+.. autopydantic_model:: threadscraper.postSchemas.PageInfo
     
 
-.. autopydantic_model:: postSchemas.Edge
+.. autopydantic_model:: threadscraper.postSchemas.Edge
     
 
-.. autopydantic_model:: postSchemas.ThreadsData
+.. autopydantic_model:: threadscraper.postSchemas.ThreadsData
     
 
-.. autopydantic_model:: postSchemas.HideLikesSettingData
+.. autopydantic_model:: threadscraper.postSchemas.HideLikesSettingData
     
 
-.. autopydantic_model:: postSchemas.WrapperData
+.. autopydantic_model:: threadscraper.postSchemas.WrapperData
     
 
-.. autopydantic_model:: postSchemas.Extensions
+.. autopydantic_model:: threadscraper.postSchemas.Extensions
     
 
-.. autopydantic_model:: postSchemas.JsonPosts
+.. autopydantic_model:: threadscraper.postSchemas.JsonPosts
     
