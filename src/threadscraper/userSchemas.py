@@ -48,7 +48,7 @@ class User(UserBase):
 
 class UserComplete(User):
     '''
-    Complete user information collected when querying a user profile.
+    Complete user information collected when querying a user profile. This includes more data s.a. biography, followers count, etc.
     '''
     hd_profile_pic_versions: List[Image] = Field(..., description="List of HD profile pictures with dimensions.")
     biography: str = Field(..., description="A short description of the user or its acccount.")
@@ -63,6 +63,7 @@ class UserComplete(User):
 
 
 class UserData(BaseModel):
+    """Wrapper Object"""
     user: User
 
 class Data(BaseModel):
@@ -76,7 +77,7 @@ class Json1(BaseModel):
     extensions: Extensions
 
 class Data2(BaseModel):
-    xdt_user_by_username: User
+    xdt_user_by_username: UserComplete
 
 class Json2(BaseModel):
     data: Data2

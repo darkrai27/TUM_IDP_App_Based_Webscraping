@@ -10,30 +10,6 @@ from threadscraper.postSchemas import (JsonPosts, JsonSinglePost)
 
 load_dotenv()
 
-# headers = {
-#     'authority': 'www.threads.net',
-#     'accept': '*/*',
-#     'accept-language': 'es-ES,es;q=0.9,en;q=0.8,de;q=0.7,it;q=0.6',
-#     'cache-control': 'no-cache',
-#     'content-type': 'application/x-www-form-urlencoded',
-#     # 'cookie': 'sessionid=62663395411%3ArhQQUKdNHeCIL6%3A2%3AAYdfHmD7YO7gb0TALiS9_P8yXwapNPpgtfU3GaDM7w; csrftoken=H9RevEGJ_7iFMwxmskpM_q; mid=ZS1GlAAEAAGpFpCx01r64hxDEH6q',
-#     'dpr': '1',
-#     'origin': 'https://www.threads.net',
-#     'pragma': 'no-cache',
-#     'referer': 'https://www.threads.net/@jeffnippard',
-#     'sec-ch-prefers-color-scheme': 'dark',
-#     'sec-ch-ua': '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
-#     'sec-ch-ua-full-version-list': '"Chromium";v="116.0.5845.179", "Not)A;Brand";v="24.0.0.0", "Google Chrome";v="116.0.5845.179"',
-#     'sec-ch-ua-mobile': '?0',
-#     'sec-ch-ua-model': '""',
-#     'sec-ch-ua-platform': '"Windows"',
-#     'sec-ch-ua-platform-version': '"10.0.0"',
-#     'sec-fetch-dest': 'empty',
-#     'sec-fetch-mode': 'cors',
-#     'sec-fetch-site': 'same-origin',
-#     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-# }
-
 headers = {
     'authority': 'www.threads.net',
     'accept': '*/*',
@@ -86,8 +62,9 @@ def get_post(postID: int, dtsg: str = None, session_id: str = None):
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
 
-  print(response.text)
+  res = json.loads(response.text)
   return JsonSinglePost.model_validate_json(response.text).data.data.edges
+  # return res
 
 def crawl_post(postID: int, dtsg: str = None, session_id: str = None, limit: int = None, delay: int = 5):
 

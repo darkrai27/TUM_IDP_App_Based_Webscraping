@@ -154,7 +154,7 @@ def get_replys(username, dtsg: str = None, session_id: str = None) -> json:
     session_id (str): Cookie identifier for the user session
 
   Returns:
-    List[Edge]: List of "Edges" objects containing in each node at least 2 "thread items" being the first
+    Json: List of "Edges" objects containing in each node at least 2 "thread items" being the first
     a post by other user and the seconf the reply from the specified user
   '''
   if dtsg == None:
@@ -182,7 +182,7 @@ def get_replys(username, dtsg: str = None, session_id: str = None) -> json:
   res = json.loads(response.text)
   return res
 
-def get_reposts(username, dtsg: str = None, session_id: str = None):
+def get_reposts(username, dtsg: str = None, session_id: str = None) -> json:
   '''
   Returns the most recent posts of a user by its internal user id.
   Similar to get_posts but por reposted content from other users.
@@ -220,7 +220,7 @@ def get_reposts(username, dtsg: str = None, session_id: str = None):
 
   return json.loads(response.text)
 
-def get_follows_info(username: str, dtsg: str = None, session_id: str = None) -> str:
+def get_follows_info(username: str, dtsg: str = None, session_id: str = None) -> json:
   '''
   Returns an overview information of the number of followers and following of an account
   Using the internal userID to perform the query.
@@ -260,7 +260,7 @@ def get_follows_info(username: str, dtsg: str = None, session_id: str = None) ->
 
   return json.loads(response.text)
 
-def get_followers(username: int, dtsg: str = None, session_id: str = None):
+def get_followers(username: int, dtsg: str = None, session_id: str = None) -> json:
 
   '''
   Collects the latest users who followed an account likers of a post
@@ -273,7 +273,7 @@ def get_followers(username: int, dtsg: str = None, session_id: str = None):
     delay (int): Delay among requests to avoid the account of getting suspended by bot activity.
 
   Returns:
-    List (User): List of users object containing information about the users who followed certain acount
+    Json: List of users object containing information about the users who followed certain acount
   '''
   if dtsg == None:
     dtsg = os.getenv("DTSG")
@@ -314,7 +314,7 @@ def get_following(username: int, dtsg: str = None, session_id: str = None):
     delay (int): Delay among requests to avoid the account of getting suspended by bot activity.
 
   Returns:
-    List (User): List of users who followed the specified user most recently.
+    Json: List of users who followed the specified user most recently.
   '''
   if dtsg == None:
     dtsg = os.getenv("DTSG")
@@ -344,8 +344,8 @@ def get_following(username: int, dtsg: str = None, session_id: str = None):
 
 def crawl_all(username: str, mode: str, dtsg: str = None, session_id: str = None, limit:int = None, delay: int = 5):
   '''
-  Returns all posts/replies or reposts or the most recent ones up to a specified limit of
-  certain.
+  Returns all posts/replies or reposts or the most recent ones up to a specified limit.
+
   Strategy: use the unique user internal id to perform recursive queries.
   Performs each query with certain delay to avoid banning the account for bot activity.
 
