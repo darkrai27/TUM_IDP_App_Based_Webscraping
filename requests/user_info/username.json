@@ -1,0 +1,35 @@
+{
+  "data": {
+    "xdt_user_by_username": {
+      "pk": "6937567427",
+      "username": "hideo_kojima",
+      "hd_profile_pic_versions": [
+        {
+          "height": 320,
+          "url": "https://scontent.cdninstagram.com/v/t51.2885-19/358544206_966103927846296_3853859317177676853_n.jpg?",
+          "width": 320
+        }
+      ],
+      "profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/358544206_966103927846296_3853859317177676853_n.jpg?",
+      "biography": "Game Creator: 70% of my body is made of movies.\nゲームデザイナー：僕の体の70%は映画でできている",
+      "friendship_status": {
+        "followed_by": false,
+        "following": false,
+        "outgoing_request": false,
+      },
+      "biography_with_entities": {
+        "entities": [],
+        "raw_text": "Game Creator: 70% of my body is made of movies.\nゲームデザイナー：僕の体の70%は映画でできている"
+      },
+      "follower_count": 431478,
+      "profile_context_facepile_users": [],
+      "text_post_app_is_private": false,
+      "full_name": "Hideo Kojima",
+      "is_verified": true,
+      "id": "6937567427"
+    }
+  },
+  "extensions": {
+    "is_final": true
+  }
+}

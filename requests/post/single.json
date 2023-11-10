@@ -1,0 +1,91 @@
+{
+  "data": {
+    "data": {
+      "edges": [
+        {
+          "node": {
+            "thread_items": [
+              {
+                "post": {
+                  "user": {
+                    "profile_pic_url": "https://scontent-fco2-1.cdninstagram.com/v/t51.2885-19/44884218_345707102882519_2446069589734326272_n.jpg?_nc_ht=scontent-fco2-1.cdninstagram.com&_nc_cat=1&_nc_ohc=3q7d6pVPrRIAX_ADXMg&edm=AJ9x6zYBAAAA&ccb=7-5&ig_cache_key=YW5vbnltb3VzX3Byb2ZpbGVfcGlj.2-ccb7-5&oh=00_AfAkVyZxSQ2GiVqeWp7dYfJFbdgaQVtYmRXilxsbeVcnLQ&oe=6551868F&_nc_sid=65462d",
+                    "username": "jtumidp2",
+                    "friendship_status": null,
+                    "pk": "62663395411",
+                    "transparency_label": null,
+                    "transparency_product": null,
+                    "transparency_product_enabled": false,
+                    "is_verified": false,
+                    "id": null,
+                    "text_post_app_is_private": false
+                  },
+                  "accessibility_caption": null,
+                  "image_versions2": {
+                    "candidates": []
+                  },
+                  "original_width": 612,
+                  "original_height": 612,
+                  "code": "Cza4jvTu9pu",
+                  "video_versions": null,
+                  "carousel_media": null,
+                  "pk": "3232144429175003758",
+                  "text_post_app_info": {
+                    "share_info": {
+                      "is_reposted_by_viewer": false,
+                      "__typename": "XDTShareInfo",
+                      "reposted_post": null,
+                      "can_repost": true,
+                      "repost_restricted_reason": null,
+                      "quoted_post": null
+                    },
+                    "can_reply": true,
+                    "is_reply": false,
+                    "hush_info": null,
+                    "reply_control": "mentioned_only",
+                    "link_preview_attachment": null,
+                    "reply_to_author": null,
+                    "is_post_unavailable": false,
+                    "post_unavailable_reason": null
+                  },
+                  "is_fb_only": null,
+                  "is_internal_only": null,
+                  "id": "3232144429175003758_62663395411",
+                  "media_type": 19,
+                  "has_audio": null,
+                  "has_liked": false,
+                  "is_paid_partnership": null,
+                  "like_and_view_counts_disabled": true,
+                  "caption": {
+                    "text": "I'm checking how the edit function works :)\n\nSo I have 5 mins since the publication of the post to edit it? Interesting..."
+                  },
+                  "taken_at": 1699521662,
+                  "like_count": 0,
+                  "media_overlay_info": null
+                },
+                "line_type": "none",
+                "view_replies_cta_string": null,
+                "reply_facepile_users": [],
+                "should_show_replies_cta": true
+              }
+            ],
+            "id": "3232144429175003758",
+            "__typename": "XDTThread"
+          },
+          "cursor": ""
+        }
+      ],
+      "page_info": {
+        "has_next_page": false,
+        "has_previous_page": false,
+        "end_cursor": null,
+        "start_cursor": null
+      }
+    },
+    "hideLikesSettingData": {
+      "hide_like_and_view_counts": false
+    }
+  },
+  "extensions": {
+    "is_final": true
+  }
+}

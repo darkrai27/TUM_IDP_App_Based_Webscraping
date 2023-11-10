@@ -2,31 +2,12 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 from typing import ForwardRef
 
-from threadscraper.userSchemas import FriendshipStatus, User, UserBase, Image
-
-class ImageVersions2(BaseModel):
-    candidates: List[Image] = Field(description="List of candidates as media previews/thumbnails")
-
-class VideoVersions(BaseModel):
-    type: int =  Field(None, description="Numeric value stating the type of video. 101,102 and 103 seem equivalent.")
-    url: str = Field(None, description="URL to the video file")
-
-class Audio(BaseModel):
-    audio_src: str = Field(description="URL to the audio file")
-    waveform_data: List[float] = Field(description="List of decimal numbers representing the waveform of the audio")
-
-class CarouselMedia(BaseModel):
-    image_versions2: ImageVersions2
-    video_versions: Optional[VideoVersions]
-    accessibility_caption: Optional[str] = Field(description="Textual description of the media in post")
-    has_audio: Optional[bool] = Field(None, description="Wether the post contains a voice note or not (It's null even when there is an audio).")
-    original_height: int
-    original_width: int
-    pk: str
-    id: str
-    code: Optional[str] = None
+from threadscraper.userSchemas import User, UserBase
+from threadscraper.mediaSchemas import Image, ImageVersions2, VideoVersions, Audio, CarouselMedia
 
 class PinnedPostInfo(BaseModel):
+    """
+    """
     can_viewer_pin_to_profile : Optional[bool] = False
     can_viewer_unpin_from_profile : Optional[bool] = False
     can_viewer_pin_to_parent_post : Optional[bool] = False
@@ -39,15 +20,22 @@ class PinnedPostInfo(BaseModel):
 PostForwardRef = ForwardRef("Post")
 
 class ShareInfo(BaseModel):
-    can_quote_post: Optional[bool] = None
-    can_repost: bool
-    is_reposted_by_viewer: bool
-    repost_restricted_reason: Optional[bool] = None
+    """
+    Object specifying if the user can quote or repost the post, if has already done so,
+    the reason why it may be restricted to do so or if the post is a reply to another post.
+    """
+    can_quote_post: Optional[bool] = Field(None, description="Wether the user can quote the post or not.")
+    can_repost: bool = Field(description="Wether the user can repost the post or not.")
+    is_reposted_by_viewer: bool = Field(description="Wether the user has already reposted the post or not.")
+    repost_restricted_reason: Optional[bool] = Field(None, description="Reason why the user can't repost the post.")
     # __typename: str
-    reposted_post: Optional[PostForwardRef] = None
-    quoted_post: Optional[bool] = None
+    reposted_post: Optional[PostForwardRef] = Field(None, description="Post object referencing the reposted post.")
+    quoted_post: Optional[PostForwardRef] = Field(None, description="Post object referencing the quoted post.") 
 
 class LinkPreviewAttachment(BaseModel):
+    """
+    Object containing the metadata such as the url preview of the attached media to a post.
+    """
     display_url: str
     favicon_url: Optional[str]
     image_url: Optional[str] = Field(description="Url to the image preview / thumbnal")
@@ -55,31 +43,35 @@ class LinkPreviewAttachment(BaseModel):
     url: str  
 
 class TextPostAppInfo(BaseModel):
+    """
+    Object containig all information regarding who can view, share and reply the post, if the post is a reply,
+    the restrictions to share or view and the reasons.
+    """
     share_info: ShareInfo
     can_reply: bool
     is_reply: bool
-    hush_info: Optional[bool] = None
-    reply_control: str
+    # hush_info: Optional[bool] = None
+    reply_control: str = Field(description="Who can reply to the post. Can be everyone, accounts_you_follow or mentioned_only.")
     pinned_post_info: Optional[PinnedPostInfo] = None
     link_preview_attachment: Optional[LinkPreviewAttachment] = None
     reply_to_author: Optional[UserBase] = None
-    is_post_unavailable: bool
-    post_unavailable_reason: Optional[bool] = None
-    impression_count: Optional[bool] = None
+    is_post_unavailable: bool = Field(description="Wether the post is unavailable or not.")
+    post_unavailable_reason: Optional[bool] = Field(None, description="Reason why the post is unavailable. Can be region locked due to copyright in specific regions, etc")
+    impression_count: Optional[bool] = Field(None, description="Number of impressions of the post.")
 
 class Caption(BaseModel):
     text: str
 
 class Post(BaseModel):
-    user: User
+    user: User = Field(description="User who posted the thread.")
     accessibility_caption: Optional[str] = Field(None, description="Caption describing the media present in the post if any.")
-    original_height: Optional[int] = Field(612) 
-    original_width: Optional[int] = Field(612)
     image_versions2: ImageVersions2 = Field(description="Image/s previews of the media (if any) in the post. No matter wether is a video or a picture.")
+    original_width: Optional[int] = Field(612)
+    original_height: Optional[int] = Field(612) 
     code: str = Field(description="Internal code for the post URL. Can be watched in the browser by accessing http://threads.net/t/{code}")
     video_versions: Optional[List[VideoVersions]] = None
     carousel_media: Optional[List[CarouselMedia]] = Field(...,description="List of all media present in the post when multiples are present.")
-    giphy_media_info: Optional[bool] = None
+    giphy_media_info: Optional[bool] = Field(None, description="Wether the post contains a gif or not.")
     pk: str
     text_post_app_info: TextPostAppInfo
     is_fb_only: Optional[bool] = None
@@ -90,36 +82,39 @@ class Post(BaseModel):
     audio: Optional[Audio] = Field(None, description="Audio file if present in the post.")
     text_with_entities: Optional[str] = None
     transcription_data: Optional[bool] = None
-    caption_is_edited: Optional[bool] = Field(None, description="Indicates if the text in posat has been edited.")
-    has_liked: bool = Field(description="States if the user has already liked the post.")
+    caption_is_edited: Optional[bool] = Field(None, description="""Indicates if the text in post has been edited. Seems to be always false even when the post has been edited.
+                                              There are no indicators in the webclient of the post being edited neither.""")
+    has_liked: bool = Field(description="States if the user whose session we are using has already liked the post.")
     is_paid_partnership: Optional[bool] = Field(None, description="States wether the post is an ad or not.")
     like_and_view_counts_disabled: bool = Field(description="Wether the likes and reach of the post are publicly visible")
-    taken_at: int = Field(description="Timestamp when the thread was posted.")
+    taken_at: int = Field(description="UNIX Timestamp when the post was published.")
     caption: Optional[Caption] = Field(None, description="Text in the post, if any")
     like_count: int = Field(description="Amount of likes in the post.")
-    media_overlay_info: Optional[bool] = None
+    media_overlay_info: Optional[str] = None
 
-class ReplyFacepileUsers(BaseModel):
-    pass
-
-class ThreadItems(BaseModel):
+class ThreadItem(BaseModel):
     post: Post
-    line_type: str
-    view_replies_cta_string: Optional[str] = None
-    reply_facepile_users: List[ReplyFacepileUsers]
-    should_show_replies_cta: bool
+    line_type: str = Field(description="""Type of line drawn next to the post. line indicates that there is a line drawn (when the post has replies). none
+                           indicates no line, no replies.""")
+    view_replies_cta_string: Optional[str] = Field(description="Text showing the number of replies to the post.")
+    # reply_facepile_users: List[ProfilePicFacepileUser] = Field([], description="Preview of profile pic of users who replied to the post.")
+    should_show_replies_cta: bool = Field(description="Wether if showing the number of replies on the client.")
 
-class Header(BaseModel):
-    pass
+# class Header(BaseModel):
+#     pass
 
 class Node(BaseModel):
-    thread_items: List[ThreadItems]
+    thread_items: List[ThreadItem]
     thread_type: Optional[str] = None
-    header: Optional[Header] = None
+    # header: Optional[Header] = None
     id: str
     # __typename: str
 
 class PageInfo(BaseModel):
+    """
+    Data structure that indicates wether there is a next page or not, and the cursors to query the next page.
+    Used when querying multiple threads from a user or more responses to a thread.
+    """
     has_next_page: bool
     has_previous_page: bool
     end_cursor: Optional[str] = Field(description="Cursor pointing the the last post in the page, useful to query the next batch of posts.")
@@ -128,29 +123,15 @@ class PageInfo(BaseModel):
 class Edge(BaseModel):
     node: Node
     cursor: str
+    # __typename: str
+
+# class HideLikesSettingData(BaseModel):
+#     """
+#     Wether the author of the thread decide to hide the likes and views of the post.
+#     """
+#     hide_like_and_view_counts: bool
 
 class ThreadsData(BaseModel):
     edges: List[Edge]
     page_info: PageInfo
-
-class HideLikesSettingData(BaseModel):
-    hide_like_and_view_counts: bool
-
-class WrapperData(BaseModel):
-    mediaData: ThreadsData
-    hideLikesSettingData: HideLikesSettingData
-
-class Extensions(BaseModel):
-    is_final: bool
-
-class JsonPosts(BaseModel):
-    data: WrapperData
-    extensions: Extensions
-
-class WrapperData2(BaseModel):
-    data: ThreadsData
-    hideLikesSettingData: HideLikesSettingData
-
-class JsonSinglePost(BaseModel):
-    data: WrapperData2
-    extensions: Extensions
+    # hideLikesSettingData: Optional[HideLikesSettingData] = None
