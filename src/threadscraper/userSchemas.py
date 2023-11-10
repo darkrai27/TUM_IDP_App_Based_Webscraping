@@ -4,11 +4,11 @@ from typing import List, Optional, ForwardRef
 from threadscraper.mediaSchemas import Image
 
 class FriendshipStatus(BaseModel):
-    is_restricted: Optional[bool] = Field(None, description="Whether the user has restricted this account.")
-    blocking: Optional[bool] = Field(None, description="Whether the user has blocked this account.")
-    muting: Optional[bool] = Field(None, description="Whether the user has muted this account.")
-    followed_by: Optional[bool] = Field(None, description="Whether the user is followed by the account.")
-    following: bool = Field(..., description="Whether the user is following the account.")
+    is_restricted: Optional[bool] = Field(None, description="Whether the session_user has restricted this account.")
+    blocking: Optional[bool] = Field(None, description="Whether the session_user has blocked this account.")
+    muting: Optional[bool] = Field(None, description="Whether the session_user has muted this account.")
+    followed_by: Optional[bool] = Field(None, description="Whether the session_user is followed by the account.")
+    following: bool = Field(..., description="Whether the session_user is following the account.")
     incoming_request: Optional[bool] = Field(None, description="Whether there's an incoming follow request.")
     outgoing_request: Optional[bool] = Field(None,description="Whether there's an outgoing follow request.")
 
@@ -63,19 +63,10 @@ class User(UserBase):
     text_post_app_has_max_posts_pinned_to_profile: Optional[bool] = Field(None, description="Wether the account has reached the maximum of pinned posts in its profile.")
     is_verified: bool = Field(..., description="Whether the account is verified.")
 
-class UserFollowsData(UserBase):
-    username: str
-    pk: str
-    id: str
-
 class FollowsCounts(BaseModel):
+    """
+    Data structure containing the amount of followers, following and pending follow requests of a user.
+    """
     total_followers_count: int
     total_following_count: int
     total_pending_follow_count: Optional[int]
-
-class FollowsData(BaseModel):
-    user: UserFollowsData
-    counts: FollowsCounts
-
-class FollowsInfo(BaseModel):
-    data: FollowsData

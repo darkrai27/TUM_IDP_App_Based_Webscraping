@@ -85,15 +85,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.FollowsCounts.total_pending_follow_count"><code class="docutils literal notranslate"><span class="pre">FollowsCounts.total_pending_follow_count</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#threadscraper.userSchemas.FollowsData"><code class="docutils literal notranslate"><span class="pre">FollowsData</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.FollowsData.counts"><code class="docutils literal notranslate"><span class="pre">FollowsData.counts</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.FollowsData.user"><code class="docutils literal notranslate"><span class="pre">FollowsData.user</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#threadscraper.userSchemas.FollowsInfo"><code class="docutils literal notranslate"><span class="pre">FollowsInfo</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.FollowsInfo.data"><code class="docutils literal notranslate"><span class="pre">FollowsInfo.data</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.userSchemas.FriendshipStatus"><code class="docutils literal notranslate"><span class="pre">FriendshipStatus</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.FriendshipStatus.blocking"><code class="docutils literal notranslate"><span class="pre">FriendshipStatus.blocking</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.FriendshipStatus.followed_by"><code class="docutils literal notranslate"><span class="pre">FriendshipStatus.followed_by</span></code></a></li>
@@ -126,12 +117,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.userSchemas.UserBase"><code class="docutils literal notranslate"><span class="pre">UserBase</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.UserBase.id"><code class="docutils literal notranslate"><span class="pre">UserBase.id</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.UserBase.username"><code class="docutils literal notranslate"><span class="pre">UserBase.username</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData"><code class="docutils literal notranslate"><span class="pre">UserFollowsData</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData.id"><code class="docutils literal notranslate"><span class="pre">UserFollowsData.id</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData.pk"><code class="docutils literal notranslate"><span class="pre">UserFollowsData.pk</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData.username"><code class="docutils literal notranslate"><span class="pre">UserFollowsData.username</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -335,7 +320,7 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.users.get_following">
 <span class="sig-name descname"><span class="pre">get_following</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_following" title="Link to this definition"></a></dt>
-<dd><p>Collects all (or n) accounts being followed by the user.</p>
+<dd><p>Collects all (or n) accounts being followed by the specified user.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -407,7 +392,7 @@ Using the internal id provides more output data in friendship_data and bio_links
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.users.get_user_posts">
 <span class="sig-name descname"><span class="pre">get_user_posts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_user_posts" title="Link to this definition"></a></dt>
-<dd><p>Returns all posts, replies or reposts or the most recent ones from the user up to a specified limit.</p>
+<dd><p>Returns all posts, replies or reposts or the most recent ones from the requested user up to a specified limit.</p>
 <p>Strategy: use the unique user internal id to perform recursive queries.
 Performs each query with certain delay to avoid banning the account for bot activity.</p>
 <dl class="field-list simple">
@@ -415,9 +400,9 @@ Performs each query with certain delay to avoid banning the account for bot acti
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>username</strong> (<em>str</em>) – unique username of the user</p></li>
 <li><p><strong>mode</strong> (<em>str</em>) – “post” for posts, “reply” for replies and “repost” for reposts</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Maximum amount of posts to query. From most recent to older. 100 by default</p></li>
 <li><p><strong>dtsg</strong> (<em>str</em>) – Value generated by Meta to validated the session</p></li>
 <li><p><strong>session_id</strong> (<em>str</em>) – Cookie identifier for the user session</p></li>
-<li><p><strong>n</strong> (<em>int</em>) – Maximum amount of posts to query. From most recent to older. 100 by default</p></li>
 <li><p><strong>delay</strong> (<em>int</em>) – Delay in seconds between each recursive query to avoid accounts suspensions for bot activity. 5 by default</p></li>
 </ul>
 </dd>
@@ -552,12 +537,12 @@ Useful to obtain the postID to use in other queries.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.posts.get_thread">
 <span class="sig-name descname"><span class="pre">get_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_thread" title="Link to this definition"></a></dt>
-<dd><p>Gets a thread with all its posts and crawls recursively all the replies up to the stablished limit.</p>
+<dd><p>Gets a thread, consisting of the original posts and all replies to this post and the replies by the author.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>postID</strong> (<em>int</em>) – Unique numerical identifier of a post.</p></li>
-<li><p><strong>n</strong> (<em>int</em>) – Maximum amount of replies to return.</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Maximum amount of replies to query.</p></li>
 <li><p><strong>delay</strong> (<em>int</em>) – Delay among requests to avoid the account of getting suspended by bot activity.</p></li>
 <li><p><strong>dtsg</strong> (<em>str</em>) – Value generated by Meta to validated the session.</p></li>
 <li><p><strong>session_id</strong> (<em>str</em>) – Cookie identifier for the user session.</p></li>
@@ -744,9 +729,11 @@ matches the query</p>
 <dl class="py class pydantic_model">
 <dt class="sig sig-object py" id="threadscraper.userSchemas.FollowsCounts">
 <em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FollowsCounts</span></span><a class="headerlink" href="#threadscraper.userSchemas.FollowsCounts" title="Link to this definition"></a></dt>
-<dd><p><details  class="autodoc_pydantic_collapsable_json">
+<dd><p>Data structure containing the amount of followers, following and pending follow requests of a user.</p>
+<p><details  class="autodoc_pydantic_collapsable_json">
 <summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FollowsCounts&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data structure containing the amount of followers, following and pending follow requests of a user.&quot;</span><span class="p">,</span>
 <span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
 <span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;total_followers_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -804,206 +791,6 @@ matches the query</p>
 </dd></dl>
 
 <dl class="py class pydantic_model">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.FollowsData">
-<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FollowsData</span></span><a class="headerlink" href="#threadscraper.userSchemas.FollowsData" title="Link to this definition"></a></dt>
-<dd><p><details  class="autodoc_pydantic_collapsable_json">
-<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FollowsData&quot;</span><span class="p">,</span>
-<span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/UserFollowsData&quot;</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;counts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/FollowsCounts&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">   </span><span class="p">},</span>
-<span class="w">   </span><span class="nt">&quot;$defs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;FollowsCounts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;total_followers_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Total Followers Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;total_following_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Total Following Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;total_pending_follow_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                  </span><span class="p">{</span>
-<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
-<span class="w">                  </span><span class="p">},</span>
-<span class="w">                  </span><span class="p">{</span>
-<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
-<span class="w">                  </span><span class="p">}</span>
-<span class="w">               </span><span class="p">],</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Total Pending Follow Count&quot;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;total_followers_count&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;total_following_count&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;total_pending_follow_count&quot;</span>
-<span class="w">         </span><span class="p">],</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FollowsCounts&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;UserFollowsData&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Id&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Username&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;pk&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pk&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;pk&quot;</span>
-<span class="w">         </span><span class="p">],</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UserFollowsData&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">   </span><span class="p">},</span>
-<span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="s2">&quot;counts&quot;</span>
-<span class="w">   </span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</details></p><dl class="field-list simple">
-<dt class="field-odd">Fields<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#threadscraper.userSchemas.FollowsData.counts" title="threadscraper.userSchemas.FollowsData.counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">counts</span> <span class="pre">(threadscraper.userSchemas.FollowsCounts)</span></code></a></p></li>
-<li><p><a class="reference internal" href="#threadscraper.userSchemas.FollowsData.user" title="threadscraper.userSchemas.FollowsData.user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user</span> <span class="pre">(threadscraper.userSchemas.UserFollowsData)</span></code></a></p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.FollowsData.counts">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">counts</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#threadscraper.userSchemas.FollowsCounts" title="threadscraper.userSchemas.FollowsCounts"><span class="pre">FollowsCounts</span></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.userSchemas.FollowsData.counts" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.FollowsData.user">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData" title="threadscraper.userSchemas.UserFollowsData"><span class="pre">UserFollowsData</span></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.userSchemas.FollowsData.user" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class pydantic_model">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.FollowsInfo">
-<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FollowsInfo</span></span><a class="headerlink" href="#threadscraper.userSchemas.FollowsInfo" title="Link to this definition"></a></dt>
-<dd><p><details  class="autodoc_pydantic_collapsable_json">
-<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FollowsInfo&quot;</span><span class="p">,</span>
-<span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/FollowsData&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">   </span><span class="p">},</span>
-<span class="w">   </span><span class="nt">&quot;$defs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;FollowsCounts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;total_followers_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Total Followers Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;total_following_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Total Following Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;total_pending_follow_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">                  </span><span class="p">{</span>
-<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
-<span class="w">                  </span><span class="p">},</span>
-<span class="w">                  </span><span class="p">{</span>
-<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
-<span class="w">                  </span><span class="p">}</span>
-<span class="w">               </span><span class="p">],</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Total Pending Follow Count&quot;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;total_followers_count&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;total_following_count&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;total_pending_follow_count&quot;</span>
-<span class="w">         </span><span class="p">],</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FollowsCounts&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;FollowsData&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/UserFollowsData&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;counts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/FollowsCounts&quot;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;counts&quot;</span>
-<span class="w">         </span><span class="p">],</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FollowsData&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;UserFollowsData&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Id&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Username&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">            </span><span class="p">},</span>
-<span class="w">            </span><span class="nt">&quot;pk&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pk&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">            </span><span class="p">}</span>
-<span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;pk&quot;</span>
-<span class="w">         </span><span class="p">],</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UserFollowsData&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">   </span><span class="p">},</span>
-<span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="s2">&quot;data&quot;</span>
-<span class="w">   </span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</details></p><dl class="field-list simple">
-<dt class="field-odd">Fields<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#threadscraper.userSchemas.FollowsInfo.data" title="threadscraper.userSchemas.FollowsInfo.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span> <span class="pre">(threadscraper.userSchemas.FollowsData)</span></code></a></p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.FollowsInfo.data">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#threadscraper.userSchemas.FollowsData" title="threadscraper.userSchemas.FollowsData"><span class="pre">FollowsData</span></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.userSchemas.FollowsInfo.data" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class pydantic_model">
 <dt class="sig sig-object py" id="threadscraper.userSchemas.FriendshipStatus">
 <em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FriendshipStatus</span></span><a class="headerlink" href="#threadscraper.userSchemas.FriendshipStatus" title="Link to this definition"></a></dt>
 <dd><p><details  class="autodoc_pydantic_collapsable_json">
@@ -1021,7 +808,7 @@ matches the query</p>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">      </span><span class="p">},</span>
 <span class="w">      </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1034,7 +821,7 @@ matches the query</p>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">      </span><span class="p">},</span>
 <span class="w">      </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1047,7 +834,7 @@ matches the query</p>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">      </span><span class="p">},</span>
 <span class="w">      </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1060,11 +847,11 @@ matches the query</p>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">      </span><span class="p">},</span>
 <span class="w">      </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">      </span><span class="p">},</span>
@@ -1117,19 +904,19 @@ matches the query</p>
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.userSchemas.FriendshipStatus.blocking">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">blocking</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.userSchemas.FriendshipStatus.blocking" title="Link to this definition"></a></dt>
-<dd><p>Whether the user has blocked this account.</p>
+<dd><p>Whether the session_user has blocked this account.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.userSchemas.FriendshipStatus.followed_by">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">followed_by</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.userSchemas.FriendshipStatus.followed_by" title="Link to this definition"></a></dt>
-<dd><p>Whether the user is followed by the account.</p>
+<dd><p>Whether the session_user is followed by the account.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.userSchemas.FriendshipStatus.following">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">following</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.userSchemas.FriendshipStatus.following" title="Link to this definition"></a></dt>
-<dd><p>Whether the user is following the account.</p>
+<dd><p>Whether the session_user is following the account.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
@@ -1141,13 +928,13 @@ matches the query</p>
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.userSchemas.FriendshipStatus.is_restricted">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_restricted</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.userSchemas.FriendshipStatus.is_restricted" title="Link to this definition"></a></dt>
-<dd><p>Whether the user has restricted this account.</p>
+<dd><p>Whether the session_user has restricted this account.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.userSchemas.FriendshipStatus.muting">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">muting</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.userSchemas.FriendshipStatus.muting" title="Link to this definition"></a></dt>
-<dd><p>Whether the user has muted this account.</p>
+<dd><p>Whether the session_user has muted this account.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
@@ -1406,7 +1193,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1419,7 +1206,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1432,7 +1219,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -1445,11 +1232,11 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>
@@ -1746,61 +1533,6 @@ matches the query</p>
 
 </dd></dl>
 
-<dl class="py class pydantic_model">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.UserFollowsData">
-<em class="property"><span class="pre">pydantic</span> <span class="pre">model</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UserFollowsData</span></span><a class="headerlink" href="#threadscraper.userSchemas.UserFollowsData" title="Link to this definition"></a></dt>
-<dd><p><details  class="autodoc_pydantic_collapsable_json">
-<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UserFollowsData&quot;</span><span class="p">,</span>
-<span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
-<span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Id&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Username&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;pk&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pk&quot;</span><span class="p">,</span>
-<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">   </span><span class="p">},</span>
-<span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="s2">&quot;pk&quot;</span>
-<span class="w">   </span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</details></p><dl class="field-list simple">
-<dt class="field-odd">Fields<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData.id" title="threadscraper.userSchemas.UserFollowsData.id"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span> <span class="pre">(str)</span></code></a></p></li>
-<li><p><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData.pk" title="threadscraper.userSchemas.UserFollowsData.pk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pk</span> <span class="pre">(str)</span></code></a></p></li>
-<li><p><a class="reference internal" href="#threadscraper.userSchemas.UserFollowsData.username" title="threadscraper.userSchemas.UserFollowsData.username"><code class="xref py py-obj docutils literal notranslate"><span class="pre">username</span> <span class="pre">(str)</span></code></a></p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.UserFollowsData.id">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.userSchemas.UserFollowsData.id" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.UserFollowsData.pk">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pk</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.userSchemas.UserFollowsData.pk" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="threadscraper.userSchemas.UserFollowsData.username">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.userSchemas.UserFollowsData.username" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="module-threadscraper.postSchemas">
 <span id="post-schemas"></span><h2>Post Schemas<a class="headerlink" href="#module-threadscraper.postSchemas" title="Link to this heading"></a></h2>
@@ -2011,7 +1743,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2024,7 +1756,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2037,7 +1769,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2050,11 +1782,11 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>
@@ -3374,7 +3106,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -3387,7 +3119,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -3400,7 +3132,7 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -3413,11 +3145,11 @@ matches the query</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>
@@ -4802,7 +4534,7 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -4815,7 +4547,7 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -4828,7 +4560,7 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -4841,11 +4573,11 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>
@@ -6142,7 +5874,7 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -6155,7 +5887,7 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -6168,7 +5900,7 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -6181,11 +5913,11 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>
@@ -7344,7 +7076,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -7357,7 +7089,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -7370,7 +7102,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -7383,11 +7115,11 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>
@@ -8595,7 +8327,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -8608,7 +8340,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -8621,7 +8353,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -8634,11 +8366,11 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>
@@ -9813,7 +9545,7 @@ indicates no line, no replies.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has restricted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has restricted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Is Restricted&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;blocking&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -9826,7 +9558,7 @@ indicates no line, no replies.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has blocked this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has blocked this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blocking&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;muting&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -9839,7 +9571,7 @@ indicates no line, no replies.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user has muted this account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user has muted this account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Muting&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;followed_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -9852,11 +9584,11 @@ indicates no line, no replies.</p>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is followed by the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is followed by the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Followed By&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;following&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the user is following the account.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Whether the session_user is following the account.&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Following&quot;</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 <span class="w">            </span><span class="p">},</span>

@@ -15,7 +15,11 @@ Session verification
 --------------------
 
 In order to extract many of the data from Threads, you need to be logged in  an account.
-To authenticate the session within our library, you need to import certain cookie values to use them
+To authenticate the session within our library, you need to import certain cookie values to use them.
+
+.. warning::
+  The user/account who's session is being imported will be referred to as the session_user 
+  in the rest of the documentation.
 
 The easiest way to do so is to download the threads request listener extenion for chrome, 
 login to the account using a VPN or proxy in your chrome browser and copy the cookie values
