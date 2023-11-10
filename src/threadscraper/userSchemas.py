@@ -56,7 +56,7 @@ class User(UserBase):
     text_post_app_is_private: bool = Field(None, description="Whether the profile is private (its posts can only be seen by accepted folowers) or not")
     transparency_label: Optional[dict] = Field(None, description="Transparency label.")
     full_name: Optional[str] = Field(None, description="The full name of the user. Limited to 30 characters, must only contain"
-                           "letters, numbers, periods, underscores and spaces.")
+                           "letters, numbers, periods, underscores and spaces. Inherited from Instagram/Meta account.")
     # text_post_app_remove_mention_entrypoint: Optional[bool] = Field(None, description="Whether to remove the mention entry point.")
     transparency_product: Optional[bool] = None
     transparency_product_enabled: Optional[bool] = None
