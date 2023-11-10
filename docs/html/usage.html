@@ -18,10 +18,11 @@
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Source" href="source.html" />
-    <link rel="prev" title="Welcome to Threads Scraper’s documentation!" href="index.html" /> 
+    <link rel="prev" title="Threads Scraper" href="about.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,13 +45,13 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">Threads Scraper</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#session-verification">Session verification</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#retrieving-information-about-users">Retrieving information about users</a></li>
 </ul>
 </li>
-</ul>
-<ul>
 <li class="toctree-l1"><a class="reference internal" href="source.html">Source</a></li>
 </ul>
 
@@ -83,14 +84,36 @@
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>To use Threads Scraper, first install it using pip:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>threads-scraper
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>threadscraper
 </pre></div>
 </div>
+</section>
+<section id="session-verification">
+<h2>Session verification<a class="headerlink" href="#session-verification" title="Link to this heading"></a></h2>
+<p>In order to extract many of the data from Threads, you need to be logged in  an account.
+To authenticate the session within our library, you need to import certain cookie values to use them</p>
+<p>The easiest way to do so is to download the threads request listener extenion for chrome,
+login to the account using a VPN or proxy in your chrome browser and copy the cookie values
+from the extension.</p>
+<p>Alternatively, you can inspect the network requests in the developer tools of your browser
+if you want to extract this values manually. To do so open the browser developer tools
+(ctrl+shift+i / cmd+alt+i) and go to the network tab. Then scroll or navigate in the website
+until you see certain requests called graphql. Click on one of them and go to the headers tab.
+Pay attention to the Cookies in the sending request in the headers tab. Copy the values of the
+session id and in the payload tab copy the value of the fb_dtsg parameter.</p>
+<a class="reference internal image-reference" href="_images/session.png"><img alt="Alternative text" src="_images/session.png" style="width: 1920px;" /></a>
+<a class="reference internal image-reference" href="_images/dtsg.png"><img alt="Alternative text" src="_images/dtsg.png" style="width: 1920px;" /></a>
+<p>These 2 variables should be stored in the .env file with using the keys
+DTSG and SESSION. Alternatively, they can be loaded as variables and passed
+as parameters to the functions. (recommended in case you want to manage
+multiple sessions)</p>
+<p>Your dotenv (.env) file should look like this:</p>
+<a class="reference internal image-reference" href="_images/dotenv.png"><img alt="Alternative text" src="_images/dotenv.png" style="width: 400px;" /></a>
 </section>
 <section id="retrieving-information-about-users">
 <h2>Retrieving information about users<a class="headerlink" href="#retrieving-information-about-users" title="Link to this heading"></a></h2>
 <p>To get all information about users import the functions in users</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">users</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">threadscrapers.users</span>
 </pre></div>
 </div>
 </section>
@@ -100,7 +123,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Threads Scraper’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="about.html" class="btn btn-neutral float-left" title="Threads Scraper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="source.html" class="btn btn-neutral float-right" title="Source" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
