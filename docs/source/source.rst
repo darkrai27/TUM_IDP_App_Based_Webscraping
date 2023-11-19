@@ -1,50 +1,132 @@
 Source
-------
+======
 
-**query_user**
+treadscraper.users
+--------------------
 
-.. autofunction:: users.queryuser
+.. **query_user**
 
-**get_posts**
+.. automodule:: threadscraper.users
+  :members:
 
-.. autofunction:: users.get_posts
+threadscraper.posts
+----------------------
 
+.. automodule:: threadscraper.posts
+  :members:
 
-**scrap_all_posts**
+threadscraper.search
+-----------------------
 
-.. autofunction:: users.scrap_all_posts
+.. automodule:: threadscraper.search
+  :members:
 
-  **get_follows_info**
+User Schemas
+------------    
 
-.. autofunction:: users.get_follows_info
+.. automodule:: threadscraper.userSchemas
+  :members:
 
+Post Schemas
+------------
 
-Schemas
+.. automodule:: threadscraper.postSchemas
+  :members:
 
-.. autopydantic_model:: schemas.HdProfilePicVersion
-    :noindex:
+Media Schemas
+-------------
+
+.. automodule:: threadscraper.mediaSchemas
+  :members:
+
+.. .. autopydantic_model:: threadscraper.userSchemas.FriendshipStatus
     
-.. autopydantic_model:: schemas.FriendshipStatus
-    :noindex:
-    
-.. autopydantic_model:: schemas.BiographyWithEntities
-    :noindex:
-    
-.. autopydantic_model:: schemas.User
-    :noindex:
-    
-.. autopydantic_model:: schemas.Data
-    :noindex:
-    
-.. autopydantic_model:: schemas.Extensions
-    :noindex:
-    
-.. autopydantic_model:: schemas.Json1
-    :noindex:
-    
-.. autopydantic_model:: schemas.UserData
-    :noindex:
-    
-.. autopydantic_model:: schemas.Json2
-    :noindex:
 
+.. .. autopydantic_model:: threadscraper.userSchemas.FriendShipStatus
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.BiographyWithEntities
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.BioLink
+
+
+.. .. autopydantic_model:: threadscraper.userSchemas.ProfilePicFacepileUser
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.UserBase
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.User
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.UserFollowsData
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.FollowsCounts
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.FollowsData
+    
+
+.. .. autopydantic_model:: threadscraper.userSchemas.FollowsInfo
+    
+
+
+
+.. Post Schemas
+.. ------------
+
+.. .. autopydantic_model:: threadscraper.postSchemas.ShareInfo
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.LinkPreviewAttachement
+
+
+.. .. autopydantic_model:: threadscraper.postSchemas.TextPostAppInfo
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.Caption
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.Post
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.ReplyFacepileUsers
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.ThreadItems
+    
+
+.. .. .. autopydantic_model:: threadscraper.postSchemas.Header
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.Node
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.PageInfo
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.Edge
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.ThreadsData
+    
+
+.. .. .. autopydantic_model:: threadscraper.postSchemas.HideLikesSettingData
+    
+
+    
+.. Media Schemas
+.. -------------
+
+.. .. autopydantic_model:: threadscraper.userSchemas.Image
+
+
+.. .. autopydantic_model:: threadscraper.postSchemas.ImageVersions2
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.VideoVersions
+    
+
+.. .. autopydantic_model:: threadscraper.postSchemas.CarouselMedia
