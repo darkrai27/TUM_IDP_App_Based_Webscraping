@@ -10,6 +10,9 @@ class ImageVersions2(BaseModel):
     candidates: List[Image] = Field(description="List of candidates as media previews/thumbnails")
 
 class VideoVersions(BaseModel):
+    """
+    Data structure containing the information of the video (if any) in the post.
+    """
     type: int =  Field(None, description="Numeric value stating the type of video. 101,102 and 103 seem equivalent.")
     url: str = Field(None, description="URL to the video file")
 

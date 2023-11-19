@@ -157,7 +157,7 @@ def get_follows_info(username: str, dtsg: str = None, session_id: str = None) ->
 
   return FollowsCounts.model_dump(response, mode='json', exclude_unset=True)
 
-def get_followers(username: int, delay: int = 5, dtsg: str = None, session_id: str = None) -> Json:
+def get_followers(username: int, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Collects 50 followers of an account.
@@ -211,7 +211,7 @@ def get_followers(username: int, delay: int = 5, dtsg: str = None, session_id: s
 
   return response
 
-def get_following(username: int, n: int = 100, delay: int = 5, dtsg: str = None, session_id: str = None) -> Json:
+def get_following(username: int, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Collects all (or n) accounts being followed by the specified user.
@@ -264,7 +264,7 @@ def get_following(username: int, n: int = 100, delay: int = 5, dtsg: str = None,
 
   return res
 
-def get_user_posts(username: str, mode: str, n: int = 100, delay: int = 5, dtsg: str = None, session_id: str = None) -> Json:
+def get_user_posts(username: str, mode: str, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
   '''
   Returns all posts, replies or reposts or the most recent ones from the requested user up to a specified limit.
 
