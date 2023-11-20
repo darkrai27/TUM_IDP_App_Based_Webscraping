@@ -331,7 +331,7 @@ def get_quotes(postID: int, n: int = 100, dtsg: str = None, session_id: str = No
 def download_media(mediaURL:str,  path: str = None) -> bool:
 
   '''
-  Downloads the media with the specified url.
+  Downloads the media from the specified url.
 
   Args:
     mediaURL (int): URL of the media.
