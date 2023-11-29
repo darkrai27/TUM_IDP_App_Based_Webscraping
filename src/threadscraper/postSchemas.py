@@ -3,7 +3,7 @@ from typing import List, Optional
 from typing import ForwardRef
 
 from threadscraper.userSchemas import User, UserIdentifiers, UserBasicInfo
-from threadscraper.mediaSchemas import Image, ImageVersions2, VideoVersions, Audio, CarouselMedia
+from threadscraper.mediaSchemas import Image, ImageVersions2, VideoVersions, Audio, CarouselMedia, GiphyMediaInfo
 
 class PinnedPostInfo(BaseModel):
     """
@@ -37,7 +37,7 @@ class LinkPreviewAttachment(BaseModel):
     Object containing the metadata such as the url preview of the attached media to a post.
     """
     display_url: str
-    favicon_url: Optional[str]
+    favicon_url: Optional[str] = None
     image_url: Optional[str] = Field(description="Url to the image preview / thumbnal")
     title: str = Field(description="Title of the link")
     url: str  
@@ -71,7 +71,7 @@ class Post(BaseModel):
     code: str = Field(description="Internal code for the post URL. Can be watched in the browser by accessing http://threads.net/t/{code}")
     video_versions: Optional[List[VideoVersions]] = Field(None, description="List of videos in the post if any.")
     carousel_media: Optional[List[CarouselMedia]] = Field(...,description="List of all media present in the post when multiples are present.")
-    giphy_media_info: Optional[bool] = Field(None, description="Wether the post contains a gif or not.")
+    giphy_media_info: Optional[GiphyMediaInfo] = Field(None, description="Wether the post contains a gif or not.")
     pk: str
     text_post_app_info: TextPostAppInfo
     is_fb_only: Optional[bool] = None
@@ -92,8 +92,9 @@ class Post(BaseModel):
     @root_validator(pre=True)
     def unpack_caption(cls, values):
         if values.get("caption", {}) != None:
-            text = values.get('caption', {}).get('text')
-            values['caption'] = text
+            if type(values.get('caption', {})) != str:
+                text = values.get('caption', {}).get('text')
+                values['caption'] = text
             return values
         else:
             values['caption'] = None

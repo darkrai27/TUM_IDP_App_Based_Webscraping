@@ -1,10 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, root_validator
 from typing import List, Optional
 
 class Image(BaseModel):
-    height: Optional[int] = Field(None, description="The height of the profile picture.")
-    url: Optional[str] = Field(..., description="The URL of the profile picture.")
-    width: Optional[int] = Field(None, description="The width of the profile picture.")
+    height: Optional[int] = Field(None, description="The height of the picture.")
+    url: Optional[str] = Field(None, description="The URL of the picture.")
+    width: Optional[int] = Field(None, description="The width of the picture.")
 
 class ImageVersions2(BaseModel):
     candidates: List[Image] = Field(description="List of candidates as media previews/thumbnails")
@@ -30,3 +30,18 @@ class CarouselMedia(BaseModel):
     pk: str
     id: str
     code: Optional[str] = None
+
+class Giph(Image):
+    webp: Optional[str] = Field(None, description="The URL in webp format.")
+
+class GiphyMediaInfo(BaseModel):
+    images: Giph = Field(description="Object containing the information of the gif in the post.")
+    @root_validator(pre=True)
+    def unpack_caption(cls, values):
+        if values.get("images", {}) != None:
+            giph = values.get('images', {}).get('fixed_height')
+            values['images'] = giph
+            return values
+        else:
+            values['images'] = None
+            return values

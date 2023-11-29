@@ -14,6 +14,13 @@ class FriendshipStatus(BaseModel):
 
 UserIdentifiersForwardRef = ForwardRef("UserIdentifiers")
 
+class BiographyEntity(BaseModel):
+    """
+    Data structure containing the information of the entity (user) mentioned in the biography.
+    """
+    user: UserIdentifiersForwardRef
+
+
 class BiographyWithEntities(BaseModel):
     """
     Data structure containing all the information about the biography and a reference to the users mentioned in it.
@@ -35,8 +42,8 @@ class UserIdentifiers(BaseModel):
     '''
     User basic identifiers present in different queries results.
     '''
-    id: Optional[int] = Field(..., description="Same values as pk, optioanl -> Not always present.")
-    username: str = Field(..., description="The username of the account. Is unique and inherited from the instagram account."
+    id: Optional[int] = Field(None, description="Same values as pk, optioanl -> Not always present.")
+    username: str = Field(None, description="The username of the account. Is unique and inherited from the instagram account."
                           "Limited to 30 characters, must only contain letters in lowercase, numbers, periods, and underscores.")
 
 class UserBasicInfo(UserIdentifiers):

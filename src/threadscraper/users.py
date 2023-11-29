@@ -110,8 +110,8 @@ def _(arg: str, dtsg: str = None, session_id: str = None) -> Json:
       res = json.loads(response.text)['data']['xdt_user_by_username']
       res = User.model_validate_json(json.dumps(res, ensure_ascii=False))
       return res.model_dump(mode='json', exclude_unset=True)
-    except:
-      print("Error - Invalid session / response. Please check your sessiones and try again.")
+    except Exception as e:
+      print("Error - Invalid session / response. Please check your sessiones and try again.", e)
   else: 
     print(f"Error - Invalid response, status code: {response.status_code}")
   return None
@@ -328,7 +328,7 @@ def get_user_posts(username: str, mode: str, n: int = 100, delay: int = 1, dtsg:
   while (n > 0 or n == -1) and cursor != None:
     data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"userID": "{user_id}", "first": "10", "after": "{response["data"]["mediaData"]["page_info"]["end_cursor"]}"}}',
+      'variables': f'{{"userID": "{user_id}", "first": "50", "after": "{response["data"]["mediaData"]["page_info"]["end_cursor"]}"}}',
       'doc_id': '23980155134932173',
     }
     response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
@@ -348,4 +348,4 @@ def get_user_posts(username: str, mode: str, n: int = 100, delay: int = 1, dtsg:
 
   print(len(res["data"]["mediaData"]["edges"]))
   res = ThreadsData.model_validate_json(json.dumps(res["data"]["mediaData"], ensure_ascii=False))
-  return res
+  return res.model_dump(mode='json', exclude_unset=True)

@@ -1,7 +1,7 @@
 Source
 ======
 
-treadscraper.users
+threadscraper.users
 --------------------
 
 .. **query_user**
