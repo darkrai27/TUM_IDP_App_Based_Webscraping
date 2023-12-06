@@ -30,7 +30,7 @@ class ShareInfo(BaseModel):
     repost_restricted_reason: Optional[bool] = Field(None, description="Reason why session_user can't repost the post.")
     # __typename: str
     reposted_post: Optional[PostForwardRef] = Field(None, description="Post object referencing the reposted post.")
-    quoted_post: Optional[PostForwardRef] = Field(None, description="Post object referencing the quoted post.") 
+    quoted_post: Optional[PostForwardRef | dict] = Field(None, description="Post object referencing the quoted post.") 
 
 class LinkPreviewAttachment(BaseModel):
     """
@@ -47,7 +47,7 @@ class TextPostAppInfo(BaseModel):
     Object containig all information regarding who can view, share and reply the post, if the post is a reply,
     the restrictions to share or view and the reasons.
     """
-    share_info: ShareInfo
+    share_info: Optional[ShareInfo] = None
     can_reply: Optional[bool] = Field(None, description="Wether session_user can reply to the post or not.")
     is_reply: Optional[bool] = Field(None, description="Wether the post is a reply to another post or not.")
     # hush_info: Optional[bool] = None
@@ -99,7 +99,7 @@ class Post(BaseModel):
         else:
             values['caption'] = None
             return values
-    like_count: int = Field(description="Amount of likes in the post.")
+    like_count: Optional[int] = Field(None, description="Amount of likes in the post.")
     media_overlay_info: Optional[str] = None
 
 class ThreadItem(BaseModel):

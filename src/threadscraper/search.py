@@ -22,7 +22,7 @@ def search_users(query: str, dtsg: str = None, session_id: str = None) -> Json:
   pass
 
 
-def search_posts(query: str, dtsg: str = None, session_id: str = None, limit: int = 10, delay: int = 5) -> Json:
+def search_posts(query: str, dtsg: str = None, session_id: str = None, limit: int = 10, delay: float = 1) -> Json:
   '''
   Performs a search of posts matching the query or posted by users whose username
   matches the query

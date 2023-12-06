@@ -64,9 +64,9 @@ def extract_medias(edges: List[Edge]):
           urlKey = video.url.split("?")[0]
           print(urlKey in medias)
           if urlKey not in medias:
-            medias[urlKey] = [video.url.url]
+            medias[urlKey] = [video.url]
           else:
-            medias[urlKey].append(video.url.url)
+            medias[urlKey].append(video.url)
           print(medias[urlKey])
 
   print("e")

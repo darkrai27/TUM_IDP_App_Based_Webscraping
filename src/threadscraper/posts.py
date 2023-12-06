@@ -74,7 +74,7 @@ def get_post_info(url:str, dtsg: str = None, session_id: str = None) -> Json:
   else:
     return  res["result"]["exports"]
 
-def get_thread(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_thread(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Gets a thread, consisting of the original posts and all replies to
@@ -114,7 +114,7 @@ def get_thread(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, sess
   res = ThreadsData.model_validate_json(json.dumps(res, ensure_ascii=False))
   return res.model_dump(mode='json', exclude_unset=True)
 
-def get_thread_by_url(url: str, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_thread_by_url(url: str, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Gets a thread, consisting of the original posts and all replies to this post and the replies by the author.
@@ -141,7 +141,7 @@ def get_thread_by_url(url: str, n: int = 100, delay: int = 1, dtsg: str = None, 
 
   return get_thread(postID, n, delay, dtsg, session_id)
 
-def get_likers(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_likers(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Collects all (or up to n) likers of a post, sorted by most recent.
@@ -220,7 +220,7 @@ def get_likers(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, sess
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
-def get_reposters(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Collects all (or up to n) users who reposted a post, sorted by most recent.
