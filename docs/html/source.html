@@ -51,6 +51,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.users.get_followers"><code class="docutils literal notranslate"><span class="pre">get_followers()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.users.get_following"><code class="docutils literal notranslate"><span class="pre">get_following()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.users.get_follows_info"><code class="docutils literal notranslate"><span class="pre">get_follows_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#threadscraper.users.get_fw"><code class="docutils literal notranslate"><span class="pre">get_fw()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.users.get_user_info"><code class="docutils literal notranslate"><span class="pre">get_user_info()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.users.get_user_posts"><code class="docutils literal notranslate"><span class="pre">get_user_posts()</span></code></a></li>
 </ul>
@@ -319,16 +320,18 @@
 <h2>threadscraper.users<a class="headerlink" href="#threadscraper-users" title="Link to this heading"></a></h2>
 <dl class="py function" id="module-threadscraper.users">
 <dt class="sig sig-object py" id="threadscraper.users.get_followers">
-<span class="sig-name descname"><span class="pre">get_followers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_followers" title="Link to this definition"></a></dt>
-<dd><p>Collects 50 followers of an account.
+<span class="sig-name descname"><span class="pre">get_followers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_followers" title="Link to this definition"></a></dt>
+<dd><p>Collects all (or n) followers of the specified account.
+Limited to 50 for some accounts - apparently if the account is verified.
 (The 50 more relevant for the account we are using to perform the query)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>postID</strong> (<em>int</em>) – Unique numerical identifier of a post.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – Unique username of the user</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Maximum amount of people following to return. Use -1 to get all of them.</p></li>
+<li><p><strong>delay</strong> (<em>int</em>) – Delay among requests to avoid the account of getting suspended by bot activity.</p></li>
 <li><p><strong>dtsg</strong> (<em>str</em>) – Value generated by Meta to validated the session.</p></li>
 <li><p><strong>session_id</strong> (<em>str</em>) – Cookie identifier for the user session.</p></li>
-<li><p><strong>delay</strong> (<em>int</em>) – Delay among requests to avoid the account of getting suspended by bot activity.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -342,16 +345,16 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.users.get_following">
-<span class="sig-name descname"><span class="pre">get_following</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_following" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_following</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_following" title="Link to this definition"></a></dt>
 <dd><p>Collects all (or n) accounts being followed by the specified user.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>postID</strong> (<em>int</em>) – Unique numerical identifier of a post.</p></li>
-<li><p><strong>n</strong> (<em>int</em>) – Maximum amount of people following to return.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – Unique username of the user</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – Maximum amount of people following to return. Use -1 to get all of them.</p></li>
+<li><p><strong>delay</strong> (<em>int</em>) – Delay among requests to avoid the account of getting suspended by bot activity.</p></li>
 <li><p><strong>dtsg</strong> (<em>str</em>) – Value generated by Meta to validated the session.</p></li>
 <li><p><strong>session_id</strong> (<em>str</em>) – Cookie identifier for the user session.</p></li>
-<li><p><strong>delay</strong> (<em>int</em>) – Delay among requests to avoid the account of getting suspended by bot activity.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -371,7 +374,7 @@ using the internal userID to perform the query.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>username</strong> (<em>str</em>) – unique username of the user</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – unique username of a user</p></li>
 <li><p><strong>dtsg</strong> (<em>str</em>) – Value generated by Meta to validated the session</p></li>
 <li><p><strong>session_id</strong> (<em>str</em>) – Cookie identifier for the user session</p></li>
 </ul>
@@ -383,6 +386,12 @@ using the internal userID to perform the query.</p>
 <dd class="field-odd"><p>Json (<a class="reference internal" href="#threadscraper.userSchemas.FollowsCounts" title="threadscraper.userSchemas.FollowsCounts">FollowsCounts</a>)</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="threadscraper.users.get_fw">
+<span class="sig-name descname"><span class="pre">get_fw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_fw" title="Link to this definition"></a></dt>
+<dd><p>Wrapper function to perforrm the logic and queries of get_followers and get_following</p>
 </dd></dl>
 
 <dl class="py function">
@@ -414,14 +423,14 @@ Using the internal id provides more output data in friendship_data and bio_links
 
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.users.get_user_posts">
-<span class="sig-name descname"><span class="pre">get_user_posts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_user_posts" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_user_posts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.users.get_user_posts" title="Link to this definition"></a></dt>
 <dd><p>Returns all posts, replies or reposts or the most recent ones from the requested user up to a specified limit.</p>
 <p>Strategy: use the unique user internal id to perform recursive queries.
 Performs each query with certain delay to avoid banning the account for bot activity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>username</strong> (<em>str</em>) – unique username of the user</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – Unique username of the user</p></li>
 <li><p><strong>mode</strong> (<em>str</em>) – “post” for posts, “reply” for replies and “repost” for reposts</p></li>
 <li><p><strong>n</strong> (<em>int</em>) – Maximum amount of posts to query. From most recent to older. 100 by default</p></li>
 <li><p><strong>dtsg</strong> (<em>str</em>) – Value generated by Meta to validated the session</p></li>
@@ -483,7 +492,7 @@ Performs each query with certain delay to avoid banning the account for bot acti
 
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.posts.get_likers">
-<span class="sig-name descname"><span class="pre">get_likers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_likers" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_likers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_likers" title="Link to this definition"></a></dt>
 <dd><p>Collects all (or up to n) likers of a post, sorted by most recent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -553,7 +562,7 @@ Useful to obtain the postID to use in other queries.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.posts.get_reposters">
-<span class="sig-name descname"><span class="pre">get_reposters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_reposters" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_reposters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_reposters" title="Link to this definition"></a></dt>
 <dd><p>Collects all (or up to n) users who reposted a post, sorted by most recent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -577,7 +586,7 @@ Useful to obtain the postID to use in other queries.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.posts.get_thread">
-<span class="sig-name descname"><span class="pre">get_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_thread" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_thread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_thread" title="Link to this definition"></a></dt>
 <dd><p>Gets a thread, consisting of the original posts and all replies to
 this post and the replies to the replies of the author</p>
 <dl class="field-list simple">
@@ -601,7 +610,7 @@ this post and the replies to the replies of the author</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.posts.get_thread_by_url">
-<span class="sig-name descname"><span class="pre">get_thread_by_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_thread_by_url" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_thread_by_url</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_thread_by_url" title="Link to this definition"></a></dt>
 <dd><p>Gets a thread, consisting of the original posts and all replies to this post and the replies by the author.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -627,7 +636,7 @@ this post and the replies to the replies of the author</p>
 <span id="threadscraper-search"></span><h2>threadscraper.search<a class="headerlink" href="#module-threadscraper.search" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.search.search_posts">
-<span class="sig-name descname"><span class="pre">search_posts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.search.search_posts" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">search_posts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.search.search_posts" title="Link to this definition"></a></dt>
 <dd><p>Performs a search of posts matching the query or posted by users whose username
 matches the query</p>
 <dl class="field-list simple">
@@ -2580,9 +2589,17 @@ matches the query</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caption&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;like_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amount of likes in the post.&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;media_overlay_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2605,8 +2622,7 @@ matches the query</p>
 <span class="w">            </span><span class="s2">&quot;text_post_app_info&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;media_type&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;like_count&quot;</span>
+<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
@@ -2684,11 +2700,15 @@ matches the query</p>
 <span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Post&quot;</span>
 <span class="w">                  </span><span class="p">},</span>
 <span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
 <span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quoted Post&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ShareInfo&quot;</span><span class="p">,</span>
@@ -2698,7 +2718,15 @@ matches the query</p>
 <span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object containig all information regarding who can view, share and reply the post, if the post is a reply,\nthe restrictions to share or view and the reasons.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;share_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;can_reply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2812,9 +2840,6 @@ matches the query</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Impression Count&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;share_info&quot;</span>
-<span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextPostAppInfo&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
 <span class="w">      </span><span class="p">},</span>
@@ -4136,9 +4161,17 @@ matches the query</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caption&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;like_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amount of likes in the post.&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;media_overlay_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -4161,8 +4194,7 @@ matches the query</p>
 <span class="w">            </span><span class="s2">&quot;text_post_app_info&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;media_type&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;like_count&quot;</span>
+<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
@@ -4240,11 +4272,15 @@ matches the query</p>
 <span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Post&quot;</span>
 <span class="w">                  </span><span class="p">},</span>
 <span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
 <span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quoted Post&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ShareInfo&quot;</span><span class="p">,</span>
@@ -4254,7 +4290,15 @@ matches the query</p>
 <span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object containig all information regarding who can view, share and reply the post, if the post is a reply,\nthe restrictions to share or view and the reasons.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;share_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;can_reply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -4368,9 +4412,6 @@ matches the query</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Impression Count&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;share_info&quot;</span>
-<span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextPostAppInfo&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
 <span class="w">      </span><span class="p">},</span>
@@ -5694,9 +5735,17 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caption&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;like_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amount of likes in the post.&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;media_overlay_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -5719,8 +5768,7 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">            </span><span class="s2">&quot;text_post_app_info&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;media_type&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;like_count&quot;</span>
+<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
@@ -5798,11 +5846,15 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Post&quot;</span>
 <span class="w">                  </span><span class="p">},</span>
 <span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
 <span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quoted Post&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ShareInfo&quot;</span><span class="p">,</span>
@@ -5812,7 +5864,15 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object containig all information regarding who can view, share and reply the post, if the post is a reply,\nthe restrictions to share or view and the reasons.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;share_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;can_reply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -5926,9 +5986,6 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Impression Count&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;share_info&quot;</span>
-<span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextPostAppInfo&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
 <span class="w">      </span><span class="p">},</span>
@@ -6224,7 +6281,7 @@ Used when querying multiple threads from a user or more responses to a thread.</
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.is_internal_only" title="threadscraper.postSchemas.Post.is_internal_only"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_internal_only</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.is_paid_partnership" title="threadscraper.postSchemas.Post.is_paid_partnership"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_paid_partnership</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.like_and_view_counts_disabled" title="threadscraper.postSchemas.Post.like_and_view_counts_disabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">like_and_view_counts_disabled</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
-<li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.like_count" title="threadscraper.postSchemas.Post.like_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">like_count</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.like_count" title="threadscraper.postSchemas.Post.like_count"><code class="xref py py-obj docutils literal notranslate"><span class="pre">like_count</span> <span class="pre">(int</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.media_overlay_info" title="threadscraper.postSchemas.Post.media_overlay_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">media_overlay_info</span> <span class="pre">(str</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.media_type" title="threadscraper.postSchemas.Post.media_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">media_type</span> <span class="pre">(int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.Post.original_height" title="threadscraper.postSchemas.Post.original_height"><code class="xref py py-obj docutils literal notranslate"><span class="pre">original_height</span> <span class="pre">(int</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
@@ -6330,7 +6387,7 @@ There are no indicators in the webclient of the post being edited neither.</p>
 
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.postSchemas.Post.like_count">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">like_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.postSchemas.Post.like_count" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">like_count</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.postSchemas.Post.like_count" title="Link to this definition"></a></dt>
 <dd><p>Amount of likes in the post.</p>
 </dd></dl>
 
@@ -7170,9 +7227,17 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caption&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;like_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amount of likes in the post.&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;media_overlay_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -7195,8 +7260,7 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">            </span><span class="s2">&quot;text_post_app_info&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;media_type&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;like_count&quot;</span>
+<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
@@ -7274,11 +7338,15 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Post&quot;</span>
 <span class="w">                  </span><span class="p">},</span>
 <span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
 <span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quoted Post&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ShareInfo&quot;</span><span class="p">,</span>
@@ -7288,7 +7356,15 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object containig all information regarding who can view, share and reply the post, if the post is a reply,\nthe restrictions to share or view and the reasons.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;share_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;can_reply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -7402,9 +7478,6 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Impression Count&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;share_info&quot;</span>
-<span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextPostAppInfo&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
 <span class="w">      </span><span class="p">},</span>
@@ -7688,7 +7761,7 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo.can_quote_post" title="threadscraper.postSchemas.ShareInfo.can_quote_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">can_quote_post</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo.can_repost" title="threadscraper.postSchemas.ShareInfo.can_repost"><code class="xref py py-obj docutils literal notranslate"><span class="pre">can_repost</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo.is_reposted_by_viewer" title="threadscraper.postSchemas.ShareInfo.is_reposted_by_viewer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_reposted_by_viewer</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
-<li><p><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo.quoted_post" title="threadscraper.postSchemas.ShareInfo.quoted_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quoted_post</span> <span class="pre">(threadscraper.postSchemas.Post</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo.quoted_post" title="threadscraper.postSchemas.ShareInfo.quoted_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quoted_post</span> <span class="pre">(threadscraper.postSchemas.Post</span> <span class="pre">|</span> <span class="pre">dict</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo.repost_restricted_reason" title="threadscraper.postSchemas.ShareInfo.repost_restricted_reason"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repost_restricted_reason</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo.reposted_post" title="threadscraper.postSchemas.ShareInfo.reposted_post"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reposted_post</span> <span class="pre">(threadscraper.postSchemas.Post</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 </ul>
@@ -7714,7 +7787,7 @@ the reason why it may be restricted to do so or if the post is a reply to anothe
 
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.postSchemas.ShareInfo.quoted_post">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">quoted_post</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#threadscraper.postSchemas.Post" title="threadscraper.postSchemas.Post"><span class="pre">Post</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.postSchemas.ShareInfo.quoted_post" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">quoted_post</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#threadscraper.postSchemas.Post" title="threadscraper.postSchemas.Post"><span class="pre">Post</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.postSchemas.ShareInfo.quoted_post" title="Link to this definition"></a></dt>
 <dd><p>Post object referencing the quoted post.</p>
 </dd></dl>
 
@@ -8502,9 +8575,17 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caption&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;like_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amount of likes in the post.&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;media_overlay_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -8527,8 +8608,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">            </span><span class="s2">&quot;text_post_app_info&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;media_type&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;like_count&quot;</span>
+<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
@@ -8606,11 +8686,15 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Post&quot;</span>
 <span class="w">                  </span><span class="p">},</span>
 <span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
 <span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quoted Post&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ShareInfo&quot;</span><span class="p">,</span>
@@ -8620,7 +8704,15 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object containig all information regarding who can view, share and reply the post, if the post is a reply,\nthe restrictions to share or view and the reasons.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;share_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;can_reply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -8734,9 +8826,6 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Impression Count&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;share_info&quot;</span>
-<span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextPostAppInfo&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
 <span class="w">      </span><span class="p">},</span>
@@ -9026,7 +9115,7 @@ the restrictions to share or view and the reasons.</p>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.TextPostAppInfo.post_unavailable_reason" title="threadscraper.postSchemas.TextPostAppInfo.post_unavailable_reason"><code class="xref py py-obj docutils literal notranslate"><span class="pre">post_unavailable_reason</span> <span class="pre">(bool</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.TextPostAppInfo.reply_control" title="threadscraper.postSchemas.TextPostAppInfo.reply_control"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reply_control</span> <span class="pre">(str</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#threadscraper.postSchemas.TextPostAppInfo.reply_to_author" title="threadscraper.postSchemas.TextPostAppInfo.reply_to_author"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reply_to_author</span> <span class="pre">(threadscraper.userSchemas.UserIdentifiers</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
-<li><p><a class="reference internal" href="#threadscraper.postSchemas.TextPostAppInfo.share_info" title="threadscraper.postSchemas.TextPostAppInfo.share_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_info</span> <span class="pre">(threadscraper.postSchemas.ShareInfo)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#threadscraper.postSchemas.TextPostAppInfo.share_info" title="threadscraper.postSchemas.TextPostAppInfo.share_info"><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_info</span> <span class="pre">(threadscraper.postSchemas.ShareInfo</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -9083,7 +9172,7 @@ the restrictions to share or view and the reasons.</p>
 
 <dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="threadscraper.postSchemas.TextPostAppInfo.share_info">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo" title="threadscraper.postSchemas.ShareInfo"><span class="pre">ShareInfo</span></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#threadscraper.postSchemas.TextPostAppInfo.share_info" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">share_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#threadscraper.postSchemas.ShareInfo" title="threadscraper.postSchemas.ShareInfo"><span class="pre">ShareInfo</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#threadscraper.postSchemas.TextPostAppInfo.share_info" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -9885,9 +9974,17 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caption&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;like_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amount of likes in the post.&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;media_overlay_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -9910,8 +10007,7 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">            </span><span class="s2">&quot;text_post_app_info&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;media_type&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;like_count&quot;</span>
+<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
@@ -9989,11 +10085,15 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Post&quot;</span>
 <span class="w">                  </span><span class="p">},</span>
 <span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
 <span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quoted Post&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ShareInfo&quot;</span><span class="p">,</span>
@@ -10003,7 +10103,15 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object containig all information regarding who can view, share and reply the post, if the post is a reply,\nthe restrictions to share or view and the reasons.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;share_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;can_reply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -10117,9 +10225,6 @@ the restrictions to share or view and the reasons.</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Impression Count&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;share_info&quot;</span>
-<span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextPostAppInfo&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
 <span class="w">      </span><span class="p">},</span>
@@ -11311,9 +11416,17 @@ indicates no line, no replies.</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Caption&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;like_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Amount of likes in the post.&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Like Count&quot;</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;media_overlay_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -11336,8 +11449,7 @@ indicates no line, no replies.</p>
 <span class="w">            </span><span class="s2">&quot;text_post_app_info&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
 <span class="w">            </span><span class="s2">&quot;media_type&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;like_count&quot;</span>
+<span class="w">            </span><span class="s2">&quot;taken_at&quot;</span>
 <span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
@@ -11415,11 +11527,15 @@ indicates no line, no replies.</p>
 <span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Post&quot;</span>
 <span class="w">                  </span><span class="p">},</span>
 <span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
 <span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
 <span class="w">                  </span><span class="p">}</span>
 <span class="w">               </span><span class="p">],</span>
 <span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span>
+<span class="w">               </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Post object referencing the quoted post.&quot;</span><span class="p">,</span>
+<span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quoted Post&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ShareInfo&quot;</span><span class="p">,</span>
@@ -11429,7 +11545,15 @@ indicates no line, no replies.</p>
 <span class="w">         </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Object containig all information regarding who can view, share and reply the post, if the post is a reply,\nthe restrictions to share or view and the reasons.&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;share_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">               </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/ShareInfo&quot;</span>
+<span class="w">                  </span><span class="p">},</span>
+<span class="w">                  </span><span class="p">{</span>
+<span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">                  </span><span class="p">}</span>
+<span class="w">               </span><span class="p">],</span>
+<span class="w">               </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="nt">&quot;can_reply&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">               </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -11543,9 +11667,6 @@ indicates no line, no replies.</p>
 <span class="w">               </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Impression Count&quot;</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">         </span><span class="p">},</span>
-<span class="w">         </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;share_info&quot;</span>
-<span class="w">         </span><span class="p">],</span>
 <span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TextPostAppInfo&quot;</span><span class="p">,</span>
 <span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
 <span class="w">      </span><span class="p">},</span>
