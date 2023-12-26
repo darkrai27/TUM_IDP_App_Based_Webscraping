@@ -62,6 +62,41 @@ class TextPostAppInfo(BaseModel):
 class Caption(BaseModel):
     text: str
 
+class Tallie(BaseModel):
+    "List of options and votes for a poll."
+    text: str
+    count: int
+
+class Poll(BaseModel):
+    expires_at: Optional[int] = Field(None, description="UNIX Timestamp when the poll expires.")
+    finished: bool = Field(False, description="Wether the poll has finished or not.")
+    poll_id: int = Field(description="Internal ID of the poll.")
+    tallies: List[Tallie]
+class CaptionAddOn(BaseModel):
+    """
+    Object containing additional information about the caption.
+    """
+    poll: Poll
+
+class Entity(BaseModel):
+    id: int = Field(description="Internal ID of the entity.")
+    display_text: Optional[str] = Field(None, description="Text of the entity.")
+    entity_type: str = Field(description="Wether the entity is a mention, tag, etc.")
+
+class Entities(BaseModel):
+    """
+    Object containing the entities (mentions, hashtags, etc) in the text of the post.
+    """
+    entity: Entity
+    offset: int = Field(description="Offset of the entity in the text.")
+    length: int = Field(description="Length of the entity in the text.")
+
+class Text_Entities(BaseModel):
+    """
+    Object containing the entities (mentions, hashtags, etc) in the text of the post.
+    """
+    entities: List[Entities] = Field([], description="List of entities in the text of the post.")
+
 class Post(BaseModel):
     user: User  | UserIdentifiers = Field(description="User who posted the thread.")
     accessibility_caption: Optional[str] = Field(None, description="Caption describing the media present in the post if any.")
@@ -80,7 +115,7 @@ class Post(BaseModel):
     media_type: int = Field(description="Numeric value stating the type of post. 19 indicates text only")
     has_audio: Optional[bool] = Field(None, description="Wether the post contains a voice note or not (It's null even when there is an audio).")
     audio: Optional[Audio] = Field(None, description="Audio file if present in the post.")
-    text_with_entities: Optional[str] = None
+    text_with_entities: Optional[Text_Entities] = Field(None, description="Text in the post with the entities (mentions, hashtags, etc).")
     transcription_data: Optional[bool] = None
     caption_is_edited: Optional[bool] = Field(None, description="""Indicates if the text in post has been edited. Seems to be always false even when the post has been edited.
                                               There are no indicators in the webclient of the post being edited neither.""")
@@ -99,6 +134,7 @@ class Post(BaseModel):
         else:
             values['caption'] = None
             return values
+    caption_add_on: Optional[CaptionAddOn] = Field(None, description="Additional information about the caption.")
     like_count: Optional[int] = Field(None, description="Amount of likes in the post.")
     media_overlay_info: Optional[str] = None
 
@@ -106,7 +142,7 @@ class ThreadItem(BaseModel):
     post: Post
     line_type: str = Field(description="""Type of line drawn next to the post. line indicates that there is a line drawn (when the post has replies). none
                            indicates no line, no replies.""")
-    view_replies_cta_string: Optional[str] = Field(description="Text showing the number of replies to the post.")
+    view_replies_cta_string: Optional[str] = Field(None, description="Text showing the number of replies to the post.")
     # reply_facepile_users: List[ProfilePicFacepileUser] = Field([], description="Preview of profile pic of users who replied to the post.")
     should_show_replies_cta: bool = Field(description="Wether if showing the number of replies on the client.")
 

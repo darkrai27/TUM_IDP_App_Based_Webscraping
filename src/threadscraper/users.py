@@ -184,7 +184,6 @@ def get_fw(username: str, mode: str, n: int = 100, delay: float = 1, dtsg: str =
     'sessionid': session_id
   }
 
-  print(mode, doc_id)
   data = {
     'fb_dtsg': dtsg,
     'variables': f'{{"userID":"{user_id}"}}',
@@ -199,23 +198,17 @@ def get_fw(username: str, mode: str, n: int = 100, delay: float = 1, dtsg: str =
   end_cursor = response["data"][mode]["page_info"]["end_cursor"]
   if end_cursor is None:
     end_cursor = count
-  print(end_cursor)
 
   while (count < n or n == -1) and res["data"][mode]["page_info"]["has_next_page"]:
     data['variables'] = f'{{"after":"{end_cursor}","before":null,"count":20,"first":10,"last":null,"userID":"{user_id}","__relay_internal__pv__BarcelonaIsLoggedInrelayprovider":true}}'
     response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
     response = json.loads(response.text)
-    print(response)
     if response["data"][mode]["edges"] is not None:
       res["data"][mode]["edges"].extend(response["data"][mode]["edges"])
       count += len(response["data"][mode]["edges"])
       end_cursor = response["data"][mode]["page_info"]["end_cursor"]
     
     sleep(delay)
-    print(end_cursor)
-    print(response["data"][mode]["page_info"]["has_next_page"])
-
-  print(len(res["data"][mode]["edges"]))
 
   return res["data"][mode]["edges"]
 
@@ -336,7 +329,7 @@ def get_user_posts(username: str, mode: str, n: int = 100, delay: float = 1, dts
     sleep(delay)
   
   res["data"]["mediaData"]["page_info"] = response["data"]["mediaData"]["page_info"]
-
+  
   print(len(res["data"]["mediaData"]["edges"]))
   res = ThreadsData.model_validate_json(json.dumps(res["data"]["mediaData"], ensure_ascii=False))
   return res.model_dump(mode='json', exclude_unset=True)

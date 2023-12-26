@@ -100,8 +100,8 @@ def get_thread(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, se
 
   data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"postID":"{postID}"}}',
-      'doc_id': '6607085376050279',
+      'variables': f'{{"postID":"{postID}","__relay_internal__pv__BarcelonaIsFirstPostContextLineEnabledrelayprovider":false,"__relay_internal__pv__BarcelonaIsViewCountEnabledrelayprovider":false}}',
+      'doc_id': '6888303811288218',
   }
   cookies = {
     'sessionid': session_id,
