@@ -312,7 +312,7 @@ def get_user_posts(username: str, mode: str, n: int = 100, delay: float = 1, dts
   while (n > 0 or n == -1) and cursor != None:
     data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"userID": "{user_id}", "first": "50", "after": "{response["data"]["mediaData"]["page_info"]["end_cursor"]}"}}',
+      'variables': f'{{"userID": "{user_id}", "first": "50", "after": "{cursor}"}}',
       'doc_id': '23980155134932173',
     }
     response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
