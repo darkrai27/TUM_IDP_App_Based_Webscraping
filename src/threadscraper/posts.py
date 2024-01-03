@@ -56,6 +56,9 @@ def get_post_info(url:str, dtsg: str = None, session_id: str = None) -> Json:
       'sessionid': session_id,
   }
 
+  url = url.split("/")[-1]
+  url = "https://www.threads.net/t/" + url
+
   data = {
       'route_urls[0]': url,
       '__a': '1',
@@ -271,7 +274,7 @@ def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None,
   while (n > 0 or n == -1) and cursor != None:
     data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"after":"{response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]}","first":10,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"repost"}}}}',
+      'variables': f'{{"after":"{cursor}","first":10,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"repost"}}}}',
       'doc_id': '6929221547142095',
     }
 
@@ -302,7 +305,7 @@ def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None,
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
-def get_quotes(postID: int, n: int = 100, dtsg: str = None, session_id: str = None) -> Json:
+def get_quotes(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
   
     '''
     Collects all (or up to n) quotes and the users who quoted a post, sorted by most recent.
@@ -325,7 +328,50 @@ def get_quotes(postID: int, n: int = 100, dtsg: str = None, session_id: str = No
     
     if session_id == None:
       session_id = os.getenv("SESSION")
-    pass
+    
+    cookies = {
+      'sessionid': session_id,
+    }
+
+    data = {
+      'fb_dtsg': dtsg,
+      'variables': f'{{"after":null,"first":null,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"quote"}}}}',
+      'doc_id': '6929221547142095',
+    }
+
+    response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
+    response = json.loads(response.text)
+    edges = response["data"]["feedback_hub_tab_items"]["edges"]
+
+    cursor = None
+    try: 
+      cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
+    except:
+      print("Cursor not found")
+
+    if n > 0:
+      n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
+
+    while (n > 0 or n == -1) and cursor != None:
+      data = {
+        'fb_dtsg': dtsg,
+        'variables': f'{{"after":"{cursor}","first":null,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"quote"}}}}',
+        'doc_id': '6929221547142095',
+      }
+      response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
+      response = json.loads(response.text)
+      cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
+      
+      if len(response["data"]["feedback_hub_tab_items"]["edges"]) > 0:
+        edges.extend(response["data"]["feedback_hub_tab_items"]["edges"])
+      else:
+        break
+
+      if n > 0:
+        n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
+      sleep(delay)
+        # res = ThreadsData.model_validate_json(json.dumps(res["data"]["feedback_hub_tab_items"], ensure_ascii=False))
+    return edges
 
 def download_media(mediaURL:str,  path: str = None) -> bool:
   '''
