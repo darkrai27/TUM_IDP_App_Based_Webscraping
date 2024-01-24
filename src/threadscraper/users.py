@@ -199,7 +199,7 @@ def get_fw(username: str, mode: str, n: int = 100, delay: float = 1, dtsg: str =
   if end_cursor is None:
     end_cursor = count
 
-  while (count < n or n == -1) and res["data"][mode]["page_info"]["has_next_page"]:
+  while (count < n or n == -1) and response["data"][mode]["page_info"]["has_next_page"]:
     data['variables'] = f'{{"after":"{end_cursor}","before":null,"count":20,"first":10,"last":null,"userID":"{user_id}","__relay_internal__pv__BarcelonaIsLoggedInrelayprovider":true}}'
     response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
     response = json.loads(response.text)
