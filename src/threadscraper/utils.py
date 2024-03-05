@@ -1,6 +1,10 @@
 import json
 from typing import List
 from threadscraper.postSchemas import Edge
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 
 def extract_captions(edges: List[Edge]):
   """
@@ -42,7 +46,6 @@ def extract_medias(edges: List[Edge]):
                 medias[urlKey] = [video.url]
               else:
                 medias[urlKey].append(video.url)
-              print(medias)
           if media.image_versions2 is not None:
             for candidate in media.image_versions2.candidates:
               urlKey = candidate.url.split("?")[0]
@@ -58,17 +61,13 @@ def extract_medias(edges: List[Edge]):
             else:
               medias[urlKey].append(candidate.url)     
       if item.post.video_versions is not None:
-        print("video")
         for video in item.post.video_versions:
-          print("video", video.url)
+          logging.info("video %s", video.url)
           urlKey = video.url.split("?")[0]
-          print(urlKey in medias)
+          logging.info("%s", urlKey in medias)
           if urlKey not in medias:
             medias[urlKey] = [video.url]
           else:
             medias[urlKey].append(video.url)
-          print(medias[urlKey])
-
-  print("e")
-  print(len(medias))
+          logging.info("%s", medias[urlKey])
   return json.dumps(medias, ensure_ascii=False)

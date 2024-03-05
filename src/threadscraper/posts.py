@@ -8,6 +8,10 @@ from dotenv import load_dotenv
 
 from threadscraper.postSchemas import ThreadsData, Likers
 
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 load_dotenv()
 
 headers = {
@@ -112,7 +116,6 @@ def get_thread(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, se
 
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  print(response.text)
   res = json.loads(response.text)['data']['data']
   res = ThreadsData.model_validate_json(json.dumps(res, ensure_ascii=False))
   return res.model_dump(mode='json', exclude_unset=True)
@@ -185,8 +188,8 @@ def get_likers(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, se
   cursor = None
   try: 
     cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
-  except:
-    print("Cursor not found")
+  except Exception as e:
+    logging.error("Cursor not found", e)
 
   if n > 0:
     n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
@@ -211,7 +214,6 @@ def get_likers(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, se
     sleep(delay)
 
   res["data"]["feedback_hub_tab_items"]["page_info"] = response["data"]["feedback_hub_tab_items"]["page_info"]
-  print(len(res["data"]["feedback_hub_tab_items"]["edges"]))
   # res = ThreadsData.model_validate_json(json.dumps(res["data"]["feedback_hub_tab_items"], ensure_ascii=False))
   res = res["data"]["feedback_hub_tab_items"]["edges"]
 
@@ -219,7 +221,7 @@ def get_likers(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, se
     user = node["node"]["actor"]
     res[res.index(node)] = user
   res = {"likers": res}
-  print(res)
+  logging.info(res)
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
@@ -259,15 +261,14 @@ def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None,
   }
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  print(response.text)
   response = json.loads(response.text)
   res = response
   
   cursor = None
   try: 
     cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
-  except:
-    print("Cursor not found")
+  except Exception as e:
+    logging.error("Cursor not found", e)
 
   if n > 0:
     n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
@@ -292,7 +293,6 @@ def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None,
     sleep(delay)
 
   res["data"]["feedback_hub_tab_items"]["page_info"] = response["data"]["feedback_hub_tab_items"]["page_info"]
-  print(len(res["data"]["feedback_hub_tab_items"]["edges"]))
     # res = ThreadsData.model_validate_json(json.dumps(res["data"]["feedback_hub_tab_items"], ensure_ascii=False))
 
   res = res["data"]["feedback_hub_tab_items"]["edges"]
@@ -301,7 +301,7 @@ def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None,
     user = node["node"]["actor"]
     res[res.index(node)] = user
   res = {"likers": res}
-  print(res)
+  logging.info(res)
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
@@ -346,8 +346,8 @@ def get_quotes(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, se
     cursor = None
     try: 
       cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
-    except:
-      print("Cursor not found")
+    except Exception as e:
+      logging.error("Cursor not found", e)
 
     if n > 0:
       n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
@@ -393,9 +393,14 @@ def download_media(mediaURL:str,  path: str = None) -> bool:
 
   if ".jpg" not in path and ".mp4" not in path:
     if ".jpg" in mediaURL:
-      path = path + ".jpg"
+      extension = ".jpg"
     elif ".mp4" in mediaURL:
-      path = path + ".mp4"
+      extension = ".mp4"
+    elif ".webp" in mediaURL:
+      extension = ".webp"
+    
+    logging.info("Saving %s file", extension)
+    path = path + extension
 
   if not os.path.exists(os.path.dirname(path)):
     os.makedirs(os.path.dirname(path))
@@ -427,8 +432,6 @@ def download_all_media(post: str | int,  path: str = None, dtsg: str = None, ses
 
   thread = get_thread(post, dtsg, session_id)
   post = thread["edges"][0]["node"]["thread_items"][0]["post"]
-
-  print(post["image_versions2"]["candidates"])
 
   i = 0
   if "carousel_media" in post and post["carousel_media"] != None:
