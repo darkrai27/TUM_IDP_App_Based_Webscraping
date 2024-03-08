@@ -6,8 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 import logging
 
-logging.basicConfig(level=logging.INFO)
-
 def login(driver,#: Union[Chrome, Edge, Firefox, Safari, Remote],
           username: str,
           password: str,

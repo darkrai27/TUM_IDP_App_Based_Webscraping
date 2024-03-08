@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field, root_validator
-from typing import List, Optional
-from typing import ForwardRef
+from typing import List, Optional, ForwardRef, Union
 
 from threadscraper.userSchemas import User, UserIdentifiers, UserBasicInfo
 from threadscraper.mediaSchemas import Image, ImageVersions2, VideoVersions, Audio, CarouselMedia, GiphyMediaInfo
@@ -98,7 +97,7 @@ class Text_Entities(BaseModel):
     entities: List[Entities] = Field([], description="List of entities in the text of the post.")
 
 class Post(BaseModel):
-    user: User  | UserIdentifiers = Field(description="User who posted the thread.")
+    user: Union[User, UserIdentifiers] = Field(description="User who posted the thread.")
     accessibility_caption: Optional[str] = Field(None, description="Caption describing the media present in the post if any.")
     image_versions2: Optional[ImageVersions2] = Field(None, description="Image/s previews of the media (if any) in the post. No matter wether is a video or a picture.")
     original_width: Optional[int] = Field(612)

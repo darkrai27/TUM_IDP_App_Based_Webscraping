@@ -63,7 +63,7 @@ class User(UserBasicInfo, UserIdentifiers):
     pk: int = Field(..., description="The primary key - unique internal numeric identifier - of the user.")
     hd_profile_pic_versions: Optional[List[Image]] = Field(None, description="List of HD profile pictures with dimensions.")
     biography: Optional[str] = Field(None, description="Customizable text. Used to describe the user or its account.")
-    friendship_status: FriendshipStatus | None = Field(None, description="Defines the friendship status among the logged account and the profile queried.")
+    friendship_status: Optional[FriendshipStatus] = Field(None, description="Defines the friendship status among the logged account and the profile queried.")
     biography_with_entities: Optional[BiographyWithEntities] = Field(None, description="Biography with entities.")
     follower_count: Optional[int] = Field(None, description="The number of followers.")
     # profile_context_facepile_users: Optional[List[ProfilePicFacepileUser]] = []

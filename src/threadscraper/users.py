@@ -137,6 +137,7 @@ def get_follows_info(username: str, dtsg: str = None, session_id: str = None) ->
     session_id = os.getenv("SESSION")
   
   profile = get_user_info(username, dtsg, session_id)
+  assert profile != None, "Error fetching user info"
   profile = User.model_validate(profile)
 
   user_id = profile.pk
@@ -176,6 +177,7 @@ def get_fw(username: str, mode: str, n: int = 100, delay: float = 1, dtsg: str =
     session_id = os.getenv("SESSION")
   
   profile = get_user_info(username, dtsg, session_id)
+  assert profile != None, "Error fetching user info"
   profile = User.model_validate(profile)
 
   user_id = profile.pk

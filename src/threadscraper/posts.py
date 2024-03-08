@@ -10,8 +10,6 @@ from threadscraper.postSchemas import ThreadsData, Likers
 
 import logging
 
-logging.basicConfig(level=logging.INFO)
-
 load_dotenv()
 
 headers = {
@@ -221,7 +219,7 @@ def get_likers(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, se
     user = node["node"]["actor"]
     res[res.index(node)] = user
   res = {"likers": res}
-  logging.info(res)
+  logging.debug(res)
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
@@ -301,7 +299,7 @@ def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None,
     user = node["node"]["actor"]
     res[res.index(node)] = user
   res = {"likers": res}
-  logging.info(res)
+  logging.debug(res)
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
