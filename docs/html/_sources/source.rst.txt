@@ -21,6 +21,12 @@ threadscraper.search
 .. automodule:: threadscraper.search
   :members:
 
+threadscraper.login
+-----------------------
+
+.. automodule:: threadscraper.login
+  :members:
+
 User Schemas
 ------------    
 

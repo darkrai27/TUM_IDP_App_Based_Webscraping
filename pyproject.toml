@@ -22,8 +22,7 @@ dependencies = [
   "pydantic_core",
   "pydantic_settings",
   "python-dotenv",
-  "selenium",
-  "selenium-wire==5.1.0",
+  "nodriver",
   "simplejson"]
 requires-python = ">=3.11"
 
