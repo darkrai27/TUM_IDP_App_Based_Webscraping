@@ -1,21 +1,15 @@
-import pickle
-import time
-from urllib.parse import unquote_plus
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
+import json
+import nodriver as uc
 import logging
+from time import sleep
 
-def login(driver,#: Union[Chrome, Edge, Firefox, Safari, Remote],
-          username: str,
+async def login(username: str,
           password: str,
           save_session: str = False) -> tuple[str, str]:
   """Login to instagram with given credential, and return True if success,
   else False.
 
   Args:
-      driver (:obj:`selenium.webdriver.remote.webdriver.WebDriver`): selenium
-        driver for controlling the browser to perform certain actions.
       username (str): username for login.
       password (str): corresponding password for login.
       save_session (str, optional): If provided, the session will be saved
@@ -25,62 +19,63 @@ def login(driver,#: Union[Chrome, Edge, Firefox, Safari, Remote],
       fb_dtsg, session: if login successes; otherwise False.
 
   Examples:
-      >>> from seleniumwire import webdriver
-      >>> driver = webdriver.Chrome('path_to_chromedriver')
-      >>> from threadscraper.login import login
-      >>> login(driver, "your_username", "your_password", "path_to_save_session")
-      >>> driver.quit()
+      >>> dtsg, session = uc.loop().run_until_complete(login('your_username', 'your_password'))
+      ('fb_dtsg', 'session')
+      - or -
+      >>> import asyncio
+      >>> asyncio.run(login('your_username', 'your_password'))
   """
   try:
-      
-    driver.get('https://www.instagram.com/accounts/login/')
+    driver = await uc.start()
+    tab = await driver.get('https://www.instagram.com/accounts/login/')
+    await tab
 
-    # Wait until the page is rendered
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.NAME, 'username')))
+    # Reject unnecessary cookies
+    reject_cookies = await tab.select('button[class="_a9-- _ap36 _a9_1"]')
+    if reject_cookies is not None:
+      await reject_cookies.click()
 
-    reject_cookies_btn = driver.find_element(By.CSS_SELECTOR, "._a9--._ap36._a9_1")
-    if reject_cookies_btn:
-      reject_cookies_btn.click()
-      time.sleep(1)
+    await tab
 
-    username_field = driver.find_element(By.NAME, 'username')
-    password_field = driver.find_element(By.NAME, 'password')
+    # Fill the username and password input fields
+    username_input = await tab.select('input[name="username"]')
+    await username_input.send_keys(username)
+    password_input = await tab.select('input[name="password"]')
+    await password_input.send_keys(password)
 
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-
-    # Locate and click the login button
-    login_button = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
-    login_button.click()
-
-    # Wait until the page url changes and is completely loaded
-    while driver.current_url == 'https://www.instagram.com/accounts/login/':
-        time.sleep(1)
-
-    not_turn_on_notifications_btn = driver.find_element(By.CSS_SELECTOR, '._a9--._ap36._a9_1')
-    if not_turn_on_notifications_btn:
-      not_turn_on_notifications_btn.click()
-
-    cookies = driver.get_cookies()
-    for cookie in cookies:
-      if cookie['name'] == 'sessionid':
-        sessionid = cookie['value']
-        sessionid = unquote_plus(sessionid)
-        break
+  # Locate and click the login button
+    sleep(1)
+    login_button = await tab.select("button[type='submit']")
+    await login_button.click()
     
-    # Listen to a request to https://www.instagram.com/api/graphql
-    for request in driver.requests:
-        if request.url == 'https://www.instagram.com/api/graphql':
-          fb_dtsg = request.body.decode().split('fb_dtsg=')[1].split('&')[0]
-          fb_dtsg = unquote_plus(fb_dtsg)
-          break
+    await tab
+    
+    i = 0
+    dtsg = None
+    while i < 3 and dtsg == None:
+      i += 1
+      sleep(5)
+      await tab.wait_for(selector='#__eqmc', timeout=60)
+
+      data = await tab.query_selector('#__eqmc')
+      if data.text != None:
+        data = json.loads(data.text)
+        dtsg = data["f"]
+
+    requests_style_cookies = await driver.cookies.get_all(requests_cookie_format=True)
+    
+    sessionid = None
+    for cookie in requests_style_cookies:
+      if cookie.name == 'sessionid':
+        sessionid = cookie.value
+      
 
     if save_session:
       with open(save_session, 'w') as file:
-        file.write('DTSG=' + fb_dtsg + '\n')
+        file.write('DTSG=' + dtsg + '\n')
         file.write('SESSION=' + sessionid + '\n')
-      
-    return fb_dtsg, sessionid
+    
+    return dtsg, sessionid
   except Exception as e:
     logging.error(f'Error while logging in: {e}')
     return False
