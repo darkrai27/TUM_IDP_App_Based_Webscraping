@@ -72,6 +72,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.search.search_users"><code class="docutils literal notranslate"><span class="pre">search_users()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-threadscraper.login">threadscraper.login</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#threadscraper.login.login"><code class="docutils literal notranslate"><span class="pre">login()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-threadscraper.userSchemas">User Schemas</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#threadscraper.userSchemas.BioLink"><code class="docutils literal notranslate"><span class="pre">BioLink</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#threadscraper.userSchemas.BioLink.url"><code class="docutils literal notranslate"><span class="pre">BioLink.url</span></code></a></li>
@@ -571,7 +575,7 @@ Useful to obtain the postID to use in other queries.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="threadscraper.posts.get_quotes">
-<span class="sig-name descname"><span class="pre">get_quotes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_quotes" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_quotes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">postID</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtsg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Json</span></span></span><a class="headerlink" href="#threadscraper.posts.get_quotes" title="Link to this definition"></a></dt>
 <dd><p>Collects all (or up to n) quotes and the users who quoted a post, sorted by most recent.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -711,6 +715,40 @@ matches the query. If tagID is specified, it will perform a search by the tag or
 <dd class="field-odd"><p>List[<a class="reference internal" href="#threadscraper.userSchemas.User" title="threadscraper.userSchemas.User">User</a>]</p>
 </dd>
 </dl>
+</dd></dl>
+
+</section>
+<section id="module-threadscraper.login">
+<span id="threadscraper-login"></span><h2>threadscraper.login<a class="headerlink" href="#module-threadscraper.login" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="threadscraper.login.login">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_session</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#threadscraper.login.login" title="Link to this definition"></a></dt>
+<dd><p>Login to instagram with given credential, and return True if success,
+else False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – username for login.</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – corresponding password for login.</p></li>
+<li><p><strong>save_session</strong> (<em>str</em><em>, </em><em>optional</em>) – If provided, the session will be saved
+to the given path. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>if login successes; otherwise False.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>fb_dtsg, session</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dtsg</span><span class="p">,</span> <span class="n">session</span> <span class="o">=</span> <span class="n">uc</span><span class="o">.</span><span class="n">loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;your_username&#39;</span><span class="p">,</span> <span class="s1">&#39;your_password&#39;</span><span class="p">))</span>
+<span class="go">(&#39;fb_dtsg&#39;, &#39;session&#39;)</span>
+<span class="go">- or -</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;your_username&#39;</span><span class="p">,</span> <span class="s1">&#39;your_password&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </section>
