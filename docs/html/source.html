@@ -780,11 +780,11 @@ to the given path. Defaults to False.</p></li>
 <span class="go">- or -</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;your_username&#39;</span><span class="p">,</span> <span class="s1">&#39;your_password&#39;</span><span class="p">))</span>
+<span class="go">- For jupyer notebooks: - (asyncio may still cause problems in jupyter notebooks)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dtsg</span><span class="p">,</span> <span class="n">session</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">login</span><span class="p">(</span><span class="s1">&#39;your_username&#39;</span><span class="p">,</span> <span class="s1">&#39;your_password&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>For jupyer notebooks:
-&gt;&gt;&gt; import asyncio
-&gt;&gt;&gt; dtsg, session = await asyncio.create_task(login(‘your_username’, ‘your_password’))</p>
 </dd></dl>
 
 </section>
