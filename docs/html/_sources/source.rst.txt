@@ -1,7 +1,7 @@
 Source
 ======
 
-treadscraper.users
+threadscraper.users
 --------------------
 
 .. **query_user**
@@ -19,6 +19,12 @@ threadscraper.search
 -----------------------
 
 .. automodule:: threadscraper.search
+  :members:
+
+threadscraper.login
+-----------------------
+
+.. automodule:: threadscraper.login
   :members:
 
 User Schemas

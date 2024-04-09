@@ -1,9 +1,8 @@
 from pydantic import BaseModel, Field, root_validator
-from typing import List, Optional
-from typing import ForwardRef
+from typing import List, Optional, ForwardRef, Union
 
 from threadscraper.userSchemas import User, UserIdentifiers, UserBasicInfo
-from threadscraper.mediaSchemas import Image, ImageVersions2, VideoVersions, Audio, CarouselMedia
+from threadscraper.mediaSchemas import Image, ImageVersions2, VideoVersions, Audio, CarouselMedia, GiphyMediaInfo
 
 class PinnedPostInfo(BaseModel):
     """
@@ -30,14 +29,14 @@ class ShareInfo(BaseModel):
     repost_restricted_reason: Optional[bool] = Field(None, description="Reason why session_user can't repost the post.")
     # __typename: str
     reposted_post: Optional[PostForwardRef] = Field(None, description="Post object referencing the reposted post.")
-    quoted_post: Optional[PostForwardRef] = Field(None, description="Post object referencing the quoted post.") 
+    quoted_post: Optional[PostForwardRef | dict] = Field(None, description="Post object referencing the quoted post.") 
 
 class LinkPreviewAttachment(BaseModel):
     """
     Object containing the metadata such as the url preview of the attached media to a post.
     """
     display_url: str
-    favicon_url: Optional[str]
+    favicon_url: Optional[str] = None
     image_url: Optional[str] = Field(description="Url to the image preview / thumbnal")
     title: str = Field(description="Title of the link")
     url: str  
@@ -47,7 +46,7 @@ class TextPostAppInfo(BaseModel):
     Object containig all information regarding who can view, share and reply the post, if the post is a reply,
     the restrictions to share or view and the reasons.
     """
-    share_info: ShareInfo
+    share_info: Optional[ShareInfo] = None
     can_reply: Optional[bool] = Field(None, description="Wether session_user can reply to the post or not.")
     is_reply: Optional[bool] = Field(None, description="Wether the post is a reply to another post or not.")
     # hush_info: Optional[bool] = None
@@ -62,8 +61,43 @@ class TextPostAppInfo(BaseModel):
 class Caption(BaseModel):
     text: str
 
+class Tallie(BaseModel):
+    "List of options and votes for a poll."
+    text: str
+    count: int
+
+class Poll(BaseModel):
+    expires_at: Optional[int] = Field(None, description="UNIX Timestamp when the poll expires.")
+    finished: bool = Field(False, description="Wether the poll has finished or not.")
+    poll_id: int = Field(description="Internal ID of the poll.")
+    tallies: List[Tallie]
+class CaptionAddOn(BaseModel):
+    """
+    Object containing additional information about the caption.
+    """
+    poll: Poll
+
+class Entity(BaseModel):
+    id: int = Field(description="Internal ID of the entity.")
+    display_text: Optional[str] = Field(None, description="Text of the entity.")
+    entity_type: str = Field(description="Wether the entity is a mention, tag, etc.")
+
+class Entities(BaseModel):
+    """
+    Object containing the entities (mentions, hashtags, etc) in the text of the post.
+    """
+    entity: Entity
+    offset: int = Field(description="Offset of the entity in the text.")
+    length: int = Field(description="Length of the entity in the text.")
+
+class Text_Entities(BaseModel):
+    """
+    Object containing the entities (mentions, hashtags, etc) in the text of the post.
+    """
+    entities: List[Entities] = Field([], description="List of entities in the text of the post.")
+
 class Post(BaseModel):
-    user: User  | UserIdentifiers = Field(description="User who posted the thread.")
+    user: Union[User, UserIdentifiers] = Field(description="User who posted the thread.")
     accessibility_caption: Optional[str] = Field(None, description="Caption describing the media present in the post if any.")
     image_versions2: Optional[ImageVersions2] = Field(None, description="Image/s previews of the media (if any) in the post. No matter wether is a video or a picture.")
     original_width: Optional[int] = Field(612)
@@ -71,7 +105,7 @@ class Post(BaseModel):
     code: str = Field(description="Internal code for the post URL. Can be watched in the browser by accessing http://threads.net/t/{code}")
     video_versions: Optional[List[VideoVersions]] = Field(None, description="List of videos in the post if any.")
     carousel_media: Optional[List[CarouselMedia]] = Field(...,description="List of all media present in the post when multiples are present.")
-    giphy_media_info: Optional[bool] = Field(None, description="Wether the post contains a gif or not.")
+    giphy_media_info: Optional[GiphyMediaInfo] = Field(None, description="Wether the post contains a gif or not.")
     pk: str
     text_post_app_info: TextPostAppInfo
     is_fb_only: Optional[bool] = None
@@ -80,7 +114,7 @@ class Post(BaseModel):
     media_type: int = Field(description="Numeric value stating the type of post. 19 indicates text only")
     has_audio: Optional[bool] = Field(None, description="Wether the post contains a voice note or not (It's null even when there is an audio).")
     audio: Optional[Audio] = Field(None, description="Audio file if present in the post.")
-    text_with_entities: Optional[str] = None
+    text_with_entities: Optional[Text_Entities] = Field(None, description="Text in the post with the entities (mentions, hashtags, etc).")
     transcription_data: Optional[bool] = None
     caption_is_edited: Optional[bool] = Field(None, description="""Indicates if the text in post has been edited. Seems to be always false even when the post has been edited.
                                               There are no indicators in the webclient of the post being edited neither.""")
@@ -92,20 +126,22 @@ class Post(BaseModel):
     @root_validator(pre=True)
     def unpack_caption(cls, values):
         if values.get("caption", {}) != None:
-            text = values.get('caption', {}).get('text')
-            values['caption'] = text
+            if type(values.get('caption', {})) != str:
+                text = values.get('caption', {}).get('text')
+                values['caption'] = text
             return values
         else:
             values['caption'] = None
             return values
-    like_count: int = Field(description="Amount of likes in the post.")
+    caption_add_on: Optional[CaptionAddOn] = Field(None, description="Additional information about the caption.")
+    like_count: Optional[int] = Field(None, description="Amount of likes in the post.")
     media_overlay_info: Optional[str] = None
 
 class ThreadItem(BaseModel):
     post: Post
     line_type: str = Field(description="""Type of line drawn next to the post. line indicates that there is a line drawn (when the post has replies). none
                            indicates no line, no replies.""")
-    view_replies_cta_string: Optional[str] = Field(description="Text showing the number of replies to the post.")
+    view_replies_cta_string: Optional[str] = Field(None, description="Text showing the number of replies to the post.")
     # reply_facepile_users: List[ProfilePicFacepileUser] = Field([], description="Preview of profile pic of users who replied to the post.")
     should_show_replies_cta: bool = Field(description="Wether if showing the number of replies on the client.")
 

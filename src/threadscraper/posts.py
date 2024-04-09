@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 
 from threadscraper.postSchemas import ThreadsData, Likers
 
+import logging
+
 load_dotenv()
 
 headers = {
@@ -56,6 +58,9 @@ def get_post_info(url:str, dtsg: str = None, session_id: str = None) -> Json:
       'sessionid': session_id,
   }
 
+  url = url.split("/")[-1]
+  url = "https://www.threads.net/t/" + url
+
   data = {
       'route_urls[0]': url,
       '__a': '1',
@@ -66,7 +71,6 @@ def get_post_info(url:str, dtsg: str = None, session_id: str = None) -> Json:
   response = requests.post('https://www.threads.net/ajax/bulk-route-definitions/', cookies=cookies, headers=headers, data=data)
 
   res = "{" + response.text.split("for (;;);{")[1]
-  print(res)
 
   res = json.loads(res)["payload"]["payloads"][url]
 
@@ -75,10 +79,11 @@ def get_post_info(url:str, dtsg: str = None, session_id: str = None) -> Json:
   else:
     return  res["result"]["exports"]
 
-def get_thread(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_thread(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
-  Gets a thread, consisting of the original posts and all replies to this post and the replies by the author.
+  Gets a thread, consisting of the original posts and all replies to
+  this post and the replies to the replies of the author
 
   Args:
     postID (int): Unique numerical identifier of a post.
@@ -100,8 +105,8 @@ def get_thread(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, sess
 
   data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"postID":"{postID}"}}',
-      'doc_id': '6607085376050279',
+      'variables': f'{{"postID":"{postID}","__relay_internal__pv__BarcelonaIsFirstPostContextLineEnabledrelayprovider":false,"__relay_internal__pv__BarcelonaIsViewCountEnabledrelayprovider":false}}',
+      'doc_id': '6888303811288218',
   }
   cookies = {
     'sessionid': session_id,
@@ -109,12 +114,11 @@ def get_thread(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, sess
 
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  print(response.text)
   res = json.loads(response.text)['data']['data']
   res = ThreadsData.model_validate_json(json.dumps(res, ensure_ascii=False))
   return res.model_dump(mode='json', exclude_unset=True)
 
-def get_thread_by_url(url: str, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_thread_by_url(url: str, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Gets a thread, consisting of the original posts and all replies to this post and the replies by the author.
@@ -141,7 +145,7 @@ def get_thread_by_url(url: str, n: int = 100, delay: int = 1, dtsg: str = None, 
 
   return get_thread(postID, n, delay, dtsg, session_id)
 
-def get_likers(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_likers(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Collects all (or up to n) likers of a post, sorted by most recent.
@@ -182,8 +186,8 @@ def get_likers(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, sess
   cursor = None
   try: 
     cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
-  except:
-    print("Cursor not found")
+  except Exception as e:
+    logging.error("Cursor not found", e)
 
   if n > 0:
     n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
@@ -208,7 +212,6 @@ def get_likers(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, sess
     sleep(delay)
 
   res["data"]["feedback_hub_tab_items"]["page_info"] = response["data"]["feedback_hub_tab_items"]["page_info"]
-  print(len(res["data"]["feedback_hub_tab_items"]["edges"]))
   # res = ThreadsData.model_validate_json(json.dumps(res["data"]["feedback_hub_tab_items"], ensure_ascii=False))
   res = res["data"]["feedback_hub_tab_items"]["edges"]
 
@@ -216,12 +219,11 @@ def get_likers(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, sess
     user = node["node"]["actor"]
     res[res.index(node)] = user
   res = {"likers": res}
-  print(res)
+  logging.debug(res)
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
-
-def get_reposters(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, session_id: str = None) -> Json:
+def get_reposters(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 
   '''
   Collects all (or up to n) users who reposted a post, sorted by most recent.
@@ -257,22 +259,21 @@ def get_reposters(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, s
   }
 
   response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
-  print(response.text)
   response = json.loads(response.text)
   res = response
   
   cursor = None
   try: 
     cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
-  except:
-    print("Cursor not found")
+  except Exception as e:
+    logging.error("Cursor not found", e)
 
   if n > 0:
     n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
   while (n > 0 or n == -1) and cursor != None:
     data = {
       'fb_dtsg': dtsg,
-      'variables': f'{{"after":"{response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]}","first":10,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"repost"}}}}',
+      'variables': f'{{"after":"{cursor}","first":10,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"repost"}}}}',
       'doc_id': '6929221547142095',
     }
 
@@ -290,7 +291,6 @@ def get_reposters(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, s
     sleep(delay)
 
   res["data"]["feedback_hub_tab_items"]["page_info"] = response["data"]["feedback_hub_tab_items"]["page_info"]
-  print(len(res["data"]["feedback_hub_tab_items"]["edges"]))
     # res = ThreadsData.model_validate_json(json.dumps(res["data"]["feedback_hub_tab_items"], ensure_ascii=False))
 
   res = res["data"]["feedback_hub_tab_items"]["edges"]
@@ -299,11 +299,11 @@ def get_reposters(postID: int, n: int = 100, delay: int = 1, dtsg: str = None, s
     user = node["node"]["actor"]
     res[res.index(node)] = user
   res = {"likers": res}
-  print(res)
+  logging.debug(res)
 
   return Likers.model_validate_json(json.dumps(res, ensure_ascii=False)).model_dump(mode='json', exclude_unset=True)
 
-def get_quotes(postID: int, n: int = 100, dtsg: str = None, session_id: str = None) -> Json:
+def get_quotes(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
   
     '''
     Collects all (or up to n) quotes and the users who quoted a post, sorted by most recent.
@@ -326,15 +326,95 @@ def get_quotes(postID: int, n: int = 100, dtsg: str = None, session_id: str = No
     
     if session_id == None:
       session_id = os.getenv("SESSION")
-    pass
+    
+    cookies = {
+      'sessionid': session_id,
+    }
 
-def download_media(postID:int,  path: str = None, dtsg: str = None, session_id: str = None) -> bool:
+    data = {
+      'fb_dtsg': dtsg,
+      'variables': f'{{"after":null,"first":null,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"quote"}}}}',
+      'doc_id': '6929221547142095',
+    }
 
+    response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
+    response = json.loads(response.text)
+    edges = response["data"]["feedback_hub_tab_items"]["edges"]
+
+    cursor = None
+    try: 
+      cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
+    except Exception as e:
+      logging.error("Cursor not found", e)
+
+    if n > 0:
+      n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
+
+    while (n > 0 or n == -1) and cursor != None:
+      data = {
+        'fb_dtsg': dtsg,
+        'variables': f'{{"after":"{cursor}","first":null,"post_id":"{postID}","request_data":{{"sort_type":"most_recent","tab_type":"quote"}}}}',
+        'doc_id': '6929221547142095',
+      }
+      response = requests.post('https://www.threads.net/api/graphql', cookies=cookies, headers=headers, data=data)
+      response = json.loads(response.text)
+      cursor = response["data"]["feedback_hub_tab_items"]["page_info"]["end_cursor"]
+      
+      if len(response["data"]["feedback_hub_tab_items"]["edges"]) > 0:
+        edges.extend(response["data"]["feedback_hub_tab_items"]["edges"])
+      else:
+        break
+
+      if n > 0:
+        n -= len(response["data"]["feedback_hub_tab_items"]["edges"])
+      sleep(delay)
+        # res = ThreadsData.model_validate_json(json.dumps(res["data"]["feedback_hub_tab_items"], ensure_ascii=False))
+    return edges
+
+def download_media(mediaURL:str,  path: str = None) -> bool:
   '''
-  Downloads the media of a post in the current or specified path
+  Downloads the media from the specified url.
 
   Args:
-    postID (int): Unique numerical identifier of a post.
+    mediaURL (int): URL of the media.
+
+  Returns:
+    bool: True if the media was downloaded successfully, False otherwise.
+  '''
+  response = requests.get(mediaURL, stream=True)
+
+  if response.status_code != 200:
+    return False
+
+  if path is None:
+    path = mediaURL.split("/")[-1]
+
+  if ".jpg" not in path and ".mp4" not in path:
+    if ".jpg" in mediaURL:
+      extension = ".jpg"
+    elif ".mp4" in mediaURL:
+      extension = ".mp4"
+    elif ".webp" in mediaURL:
+      extension = ".webp"
+    
+    logging.info("Saving %s file", extension)
+    path = path + extension
+
+  if not os.path.exists(os.path.dirname(path)):
+    os.makedirs(os.path.dirname(path))
+  with open(path, 'wb') as file:
+    for chunk in response.iter_content(chunk_size=8192):
+      file.write(chunk)
+
+  return True
+
+def download_all_media(post: str | int,  path: str = None, dtsg: str = None, session_id: int = None) -> bool:
+  '''
+  Downloads the media of a given post.
+
+  Args:
+    post (int): postID of the post.
+    post (str): URL of the post.
     path (str): Path to save the media.
     dtsg (str): Value generated by Meta to validated the session.
     session_id (str): Cookie identifier for the user session.
@@ -342,14 +422,35 @@ def download_media(postID:int,  path: str = None, dtsg: str = None, session_id: 
   Returns:
     bool: True if the media was downloaded successfully, False otherwise.
   '''
+  if isinstance(post, str):
+    post = get_post_info(post, dtsg, session_id)["rootView"]["props"]["post_id"]
+  
+  if path is None:
+    path = post
 
-  if dtsg == None:
-    dtsg = os.getenv("DTSG")
+  thread = get_thread(post, dtsg, session_id)
+  post = thread["edges"][0]["node"]["thread_items"][0]["post"]
+
+  i = 0
+  if "carousel_media" in post and post["carousel_media"] != None:
+    for node in post["carousel_media"]:
+      candidate = node["image_versions2"]["candidates"][0]
+      if download_media(candidate["url"], f"{path}_{i}.jpg") == False:
+        return False
+      i += 1
   
-  if session_id == None:
-    session_id = os.getenv("SESSION")
-  
-  if path == None:
-    path = os.getenv("MEDIA_PATH")
-  
-  pass
+  else:
+    if len(post["image_versions2"]["candidates"]) > 0:
+      candidate = post["image_versions2"]["candidates"][0]
+      if download_media(candidate["url"], f"{path}_{i}.jpg") == False:
+        return False
+      i += 1
+
+  if "video_versions" in post and post["video_versions"] != None:
+    for node in post["video_versions"]:
+      if download_media(node["url"], f"{path}_{i}.mp4") == False:
+        return False
+      i += 1
+
+
+  return True
