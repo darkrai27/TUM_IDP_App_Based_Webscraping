@@ -6,7 +6,7 @@ from time import sleep
 async def login(username: str,
           password: str,
           save_session: str = False) -> tuple[str, str]:
-  """Login to instagram with given credential, and return True if success,
+  """Login to instagram with given credential and return the tokens dtsg and sessionid,
   else False.
 
   Args:
@@ -24,6 +24,10 @@ async def login(username: str,
       - or -
       >>> import asyncio
       >>> asyncio.run(login('your_username', 'your_password'))
+
+      For jupyer notebooks:
+      >>> import asyncio
+      >>> dtsg, session = await asyncio.create_task(login('your_username', 'your_password'))
   """
   try:
     driver = await uc.start()
@@ -75,6 +79,7 @@ async def login(username: str,
         file.write('DTSG=' + dtsg + '\n')
         file.write('SESSION=' + sessionid + '\n')
     
+    driver.stop()
     return dtsg, sessionid
   except Exception as e:
     logging.error(f'Error while logging in: {e}')

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "threadscraper"
-version = "0.0.2.3.24"
+version = "0.0.3.1.6"
 authors = [
   { name="Jorge Marin", email="ge58pib@mytum.de" },
 ]
@@ -16,16 +16,13 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-dependencies = [
-  "requests==2.31.0",
-  "pydantic",
-  "pydantic_core",
-  "pydantic_settings",
-  "python-dotenv",
-  "nodriver",
-  "simplejson"]
-requires-python = ">=3.11"
 
+dependencies = [
+  "requests",
+  "pydantic",
+  "python-dotenv",
+  "nodriver"]
+requires-python = ">=3.9"
 
 [project.urls]
 "Homepage" = "https://github.com/darkrai27/TUM_IDP_App_Based_Webscraping"
