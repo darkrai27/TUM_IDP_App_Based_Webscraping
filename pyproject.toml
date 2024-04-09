@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "threadscraper"
-version = "0.0.3.1.6"
+version = "0.0.3.2"
 authors = [
   { name="Jorge Marin", email="ge58pib@mytum.de" },
 ]
@@ -22,7 +22,7 @@ dependencies = [
   "pydantic",
   "python-dotenv",
   "nodriver"]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 
 [project.urls]
 "Homepage" = "https://github.com/darkrai27/TUM_IDP_App_Based_Webscraping"

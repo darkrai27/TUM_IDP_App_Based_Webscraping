@@ -24,8 +24,7 @@ async def login(username: str,
       - or -
       >>> import asyncio
       >>> asyncio.run(login('your_username', 'your_password'))
-
-      For jupyer notebooks:
+      - For jupyer notebooks: - (asyncio may still cause problems in jupyter notebooks)
       >>> import asyncio
       >>> dtsg, session = await asyncio.create_task(login('your_username', 'your_password'))
   """
