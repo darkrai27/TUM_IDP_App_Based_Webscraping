@@ -31,7 +31,7 @@ async def login(username: str,
   try:
     driver = await uc.start()
     tab = await driver.get('https://www.instagram.com/accounts/login/')
-    await tab
+    sleep(2)
 
     # Reject unnecessary cookies
     reject_cookies = await tab.select('button[class="_a9-- _ap36 _a9_1"]')
@@ -39,10 +39,11 @@ async def login(username: str,
       await reject_cookies.click()
 
     await tab
-
+    sleep(2)
     # Fill the username and password input fields
     username_input = await tab.select('input[name="username"]')
     await username_input.send_keys(username)
+    await tab.sleep(2)
     password_input = await tab.select('input[name="password"]')
     await password_input.send_keys(password)
 
@@ -55,6 +56,7 @@ async def login(username: str,
     
     i = 0
     dtsg = None
+    sleep(10)
     while i < 3 and dtsg == None:
       i += 1
       sleep(5)
