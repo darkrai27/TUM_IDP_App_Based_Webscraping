@@ -60,7 +60,7 @@ def get_post_info(url:str, dtsg: str = None, session_id: str = None) -> Json:
 
   try:
     url = url.split("/")
-    if len(url) > 3:
+    if len(url) > 3 and "@" in url[-3]:
       url = url[-3:]
       url = "/".join(url)
     else:
@@ -159,11 +159,14 @@ def get_thread_by_url(url: str, n: int = 100, delay: float = 1, dtsg: str = None
   if session_id == None:
     session_id = os.getenv("SESSION")
 
-  postID = get_post_info(url, dtsg, session_id)
-  print(postID)
-  postID = postID["rootView"]["props"]["post_id"]
+  try:
+    postID = get_post_info(url, dtsg, session_id)
+    postID = postID["rootView"]["props"]["post_id"]
 
-  return get_thread(postID, n, delay, dtsg, session_id)
+    return get_thread(postID, n, delay, dtsg, session_id)
+  except Exception as e:
+    logging.error("Error while getting thread by URL", e)
+    return {"error": f"Error getting thread {e}"}
 
 def get_likers(postID: int, n: int = 100, delay: float = 1, dtsg: str = None, session_id: str = None) -> Json:
 

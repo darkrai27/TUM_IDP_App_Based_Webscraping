@@ -76,6 +76,7 @@ async def login(username: str,
     
     dtsg = None   
     i = 0
+    sleep(5)
     while i < 3 and dtsg == None:
       i += 1
       sleep(5)
