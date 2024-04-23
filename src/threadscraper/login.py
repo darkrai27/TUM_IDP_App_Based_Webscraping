@@ -6,7 +6,7 @@ from time import sleep
 async def login(username: str,
           password: str,
           save_session: str = False) -> tuple[str, str]:
-  """Login to instagram with given credential and return the tokens dtsg and sessionid,
+  """Login to threads with given credential and return the tokens dtsg and sessionid,
   else False.
 
   Args:
@@ -30,39 +30,60 @@ async def login(username: str,
   """
   try:
     driver = await uc.start()
-    tab = await driver.get('https://www.instagram.com/accounts/login/')
+    tab = await driver.get('https://www.threads.net/accounts/login/')
     sleep(2)
-
-    # Reject unnecessary cookies
-    reject_cookies = await tab.select('button[class="_a9-- _ap36 _a9_1"]')
-    if reject_cookies is not None:
-      await reject_cookies.click()
-
+    
+    logging.info("Going to threads.net...")
     await tab
-    sleep(2)
-    # Fill the username and password input fields
-    username_input = await tab.select('input[name="username"]')
+
+    try:
+      logging.info("Rejecting cookies")
+      reject_cookies = await tab.wait_for('[role="dialog"] > div >div > div > div > div > div > .x1i10hfl[role="button"]')
+      reject_cookies = await tab.query_selector_all('[role="dialog"] > div >div > div > div > div > div > .x1i10hfl[role="button"]')
+      print(len(reject_cookies))
+      await reject_cookies[1].click()
+    except:
+      logging.error("Couldn't find 'Reject Cookies' button")
+    
+    try:
+      sleep(1)
+      logging.info("Rejecting cookies again")
+      reject_cookies = await tab.wait_for('[role="dialog"] > div >div > div > div > div > div > .x1i10hfl[role="button"]')
+      reject_cookies = await tab.query_selector_all('[role="dialog"] > div >div > div > div > div > div > .x1i10hfl[role="button"]')
+      print(len(reject_cookies))
+      await reject_cookies[1].click()
+    except:
+      logging.error("Couldn't find 'Reject Cookies' button")
+    
+
+    try:
+      logging.info("Looking for 'Login with Instagram' button")
+      btn = await tab.wait_for('a[aria-selected="false"]',timeout=20)
+      await btn.click()
+    except:
+      logging.error("Couldn't find login button")
+    
+    username_input = await tab.wait_for('input[autocomplete="username"]')
     await username_input.send_keys(username)
-    await tab.sleep(2)
-    password_input = await tab.select('input[name="password"]')
+    sleep(1)
+    password_input = await tab.select('input[autocomplete="current-password"]')
     await password_input.send_keys(password)
 
   # Locate and click the login button
     sleep(1)
-    login_button = await tab.select("button[type='submit']")
+    login_button = await tab.select('div[role="button"]')
     await login_button.click()
     
-    await tab
-    
+    dtsg = None   
     i = 0
-    dtsg = None
-    sleep(10)
     while i < 3 and dtsg == None:
       i += 1
       sleep(5)
-      await tab.wait_for(selector='#__eqmc', timeout=60)
+      try:
+        data = await tab.wait_for('#__eqmc', timeout=60)
+      except:
+        logging.error("Couldn't find the dtsg token")
 
-      data = await tab.query_selector('#__eqmc')
       if data.text != None:
         data = json.loads(data.text)
         dtsg = data["f"]
@@ -79,7 +100,6 @@ async def login(username: str,
       with open(save_session, 'w') as file:
         file.write('DTSG=' + dtsg + '\n')
         file.write('SESSION=' + sessionid + '\n')
-    
     driver.stop()
     return dtsg, sessionid
   except Exception as e:
