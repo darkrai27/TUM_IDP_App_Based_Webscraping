@@ -419,10 +419,13 @@ def download_media(mediaURL:str,  path: str = None) -> bool:
     response = requests.get(mediaURL, stream=True)
 
     if response.status_code != 200:
+      logging.error("Error fetching media element, status code: %s", response.status_code)
       return False
 
     if path is None:
-      path = mediaURL.split("/")[-1]
+      path = os.path.curdir + os.path.sep + mediaURL.split("/")[-1].split("?")[0]
+    elif path.endswith("/"):
+      path = path + mediaURL.split("/")[-1].split("?")[0]
 
     if ".jpg" not in path and ".mp4" not in path:
       if ".jpg" in mediaURL:
@@ -431,11 +434,18 @@ def download_media(mediaURL:str,  path: str = None) -> bool:
         extension = ".mp4"
       elif ".webp" in mediaURL:
         extension = ".webp"
-      
+      elif ".heic" in mediaURL:
+        extension = ".heic"
+
+      if extension is None:
+        logging.error("Error while downloading media, please provide a valid extension for the file")
+        return False
+    
       logging.info("Saving %s file", extension)
       path = path + extension
 
     if not os.path.exists(os.path.dirname(path)):
+      print("Creating directory", path)
       os.makedirs(os.path.dirname(path))
     with open(path, 'wb') as file:
       for chunk in response.iter_content(chunk_size=8192):
